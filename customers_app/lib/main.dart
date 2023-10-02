@@ -1,11 +1,9 @@
-
-import 'package:flutter/material.dart';
-import 'package:customers_app/screens/auth_screen/views/login_screen.dart';
 import 'package:customers_app/screens/auth_screen/views/signup_screen.dart';
+import 'package:flutter/material.dart';
+
 void main() {
   runApp(
-    MyApp(),
-    
+    const MyApp(),
   );
 }
 
@@ -19,30 +17,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SignupScreen(),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import 'package:flutter/material.dart';
 
@@ -123,4 +103,3 @@ class _MyAppState extends State<MyApp> {
 //     ));
 //   }
 // }
-

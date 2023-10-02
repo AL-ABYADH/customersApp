@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:customers_app/screens/home_screen/views/home.dart';
 import 'package:customers_app/theme/customers_theme.dart';
+import 'package:flutter/material.dart';
+
+import 'login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key});
@@ -26,13 +29,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ClipRRect(
+                      borderRadius: BorderRadius.circular(32),
                       child: Image.asset(
                         'assets/profile.png',
                         height: 300,
                       ),
-                      borderRadius: BorderRadius.circular(32),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Text(
@@ -41,8 +44,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       selectionColor:
                           CustomersTheme.textSelectionTheme.selectionColor,
                     ),
-
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Padding(
@@ -51,8 +53,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         decoration: BoxDecoration(
                           color: CustomersTheme.colors.fieldFillColor,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -62,7 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -72,8 +74,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: CustomersTheme.colors.fieldFillColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             obscureText: false,
                             decoration: InputDecoration(
@@ -84,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Padding(
@@ -94,8 +96,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: CustomersTheme.colors.fieldFillColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             obscureText: true,
                             decoration: InputDecoration(
@@ -106,18 +108,17 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
                         decoration: BoxDecoration(
                           color: CustomersTheme.colors.fieldFillColor,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -126,8 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
-
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Padding(
@@ -144,14 +144,14 @@ class _SignupScreenState extends State<SignupScreen> {
                               CustomersTheme.colors.fieldFillColor,
                             ),
                             minimumSize: MaterialStateProperty.all<Size>(
-                              Size.fromHeight(
+                              const Size.fromHeight(
                                 48.0,
                               ), // Adjust the height as needed
                             ),
                           ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, // Align children to start and end
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // Align children to start and end
                             children: [
                               Text(
                                 'ادراج صورة',
@@ -169,12 +169,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
-
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    
-
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: GestureDetector(
@@ -191,14 +188,14 @@ class _SignupScreenState extends State<SignupScreen> {
                                 CustomersTheme.colors.fieldFillColor,
                               ),
                               minimumSize: MaterialStateProperty.all<Size>(
-                                Size.fromHeight(
+                                const Size.fromHeight(
                                   48.0,
                                 ), // Adjust the height as needed
                               ),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .spaceBetween, // Align children to start and end
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              // Align children to start and end
                               children: [
                                 Text(
                                   'حدد العنوان على الخريطة',
@@ -217,11 +214,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
-
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: GestureDetector(
@@ -242,14 +237,14 @@ class _SignupScreenState extends State<SignupScreen> {
                                 CustomersTheme.colors.fieldFillColor,
                               ),
                               minimumSize: MaterialStateProperty.all<Size>(
-                                Size.fromHeight(
+                                const Size.fromHeight(
                                   48.0,
                                 ), // Adjust the height as needed
                               ),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .spaceBetween, // Align children to start and end
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              // Align children to start and end
                               children: [
                                 Text(
                                   'اختر العملة (دولار أمريكي / ريال سعودي / ريال يمني)',
@@ -268,31 +263,35 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
-
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.primaryColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'تسجيل',
-                            style:
-                                CustomersTheme.textStyles.titleLarge.copyWith(
-                              color: Colors.white,
-                            ),
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: CustomersTheme.colors.primaryColor,
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
+                          child: Center(
+                            child: GestureDetector(
+                                child: Text(
+                                  'تسجيل',
+                                  style: CustomersTheme.textStyles.titleLarge
+                                      .copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return const HomePage();
+                                  }));
+                                }),
+                          ),
+                        )),
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -305,15 +304,24 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           textAlign: TextAlign.right,
                         ),
-                        Text(
-                          '  تسجيل الدخول ',
-                          style: CustomersTheme.textStyles.titleMedium.copyWith(
-                            color: CustomersTheme.colors.firstSecondaryColor,
+                        GestureDetector(
+                          child: Text(
+                            '  تسجيل الدخول ',
+                            style:
+                                CustomersTheme.textStyles.titleMedium.copyWith(
+                              color: CustomersTheme.colors.firstSecondaryColor,
+                            ),
                           ),
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return const LoginScreen();
+                            }));
+                          },
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     )
                   ],
