@@ -35,6 +35,9 @@ dependencies:
   google_fonts: null
   #google_maps_flutter: ^2.5.0
   image_picker: ^1.0.4
+  firebase_core: ^2.15.1
+  firebase_messaging: ^14.6.6
+  flutter_local_notifications: ^15.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0

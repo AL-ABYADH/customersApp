@@ -1,11 +1,16 @@
-
 import 'package:flutter/material.dart';
-import 'package:customers_app/screens/auth_screen/views/login_screen.dart';
-import 'package:customers_app/screens/auth_screen/views/signup_screen.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+
+import './screens/auth_screen/views/login_screen.dart';
+import './screens/auth_screen/views/signup_screen.dart';
+import './api/firebase_api.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseAPI().initPushAndLocalNotifications('test_topic');
   runApp(
-    MyApp(),
-    
+    const MyApp(),
   );
 }
 
@@ -19,7 +24,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SignupScreen(),
     );
