@@ -39,11 +39,11 @@ class CustomersColors {
   Color primaryColorTransparent = const Color(0xff1565c0);
   Color firstSecondaryColor = const Color(0xff27a2a2);
   Color secondSecondaryColor = const Color.fromARGB(255, 186, 134, 32);
-  Color successColor = const Color.fromARGB(255, 0, 109, 62);
-  Color errorColor = const Color.fromARGB(255, 155, 55, 77);
-  Color backgroundColor = const Color.fromARGB(255, 248, 250, 255);
-  Color fieldFillColor = const Color.fromARGB(255, 245, 245, 255);
-  Color displayTextColor = const Color.fromARGB(255, 27, 39, 51);
+  Color successColor = const Color(0xff008f00);
+  Color errorColor = const Color(0xffe33806);
+  Color backgroundColor = const Color(0xfff0f0f0);
+  Color fieldFillColor = const Color(0xffffffff);
+  Color displayTextColor = const Color(0xff666666);
   Color fieldLabel = Colors.grey;
 }
 

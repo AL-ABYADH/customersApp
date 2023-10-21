@@ -1,4 +1,5 @@
 import 'package:customers_app/screens/home_screen/views/home.dart';
+import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
 import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(32),
                       child: Image.asset(
-                        'assets/profile.png',
+                        "lib/assets/profile.png",
                         height: 300,
                       ),
                     ),
@@ -266,31 +267,22 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: CustomersTheme.colors.primaryColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Center(
-                            child: GestureDetector(
-                                child: Text(
-                                  'تسجيل',
-                                  style: CustomersTheme.textStyles.titleLarge
-                                      .copyWith(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) {
-                                    return const HomePage();
-                                  }));
-                                }),
+                    ElevatedButton(
+                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(CustomersTheme.colors.primaryColor)),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const MyApp22();
+                          }));
+                        },
+                        child: Text(
+                          'تسجيل',
+                          style: CustomersTheme.textStyles.titleLarge.copyWith(
+                            color: Colors.white,
                           ),
                         )),
+                    // ),
+                    // )),
                     const SizedBox(
                       height: 15,
                     ),

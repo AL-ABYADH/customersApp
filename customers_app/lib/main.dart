@@ -1,9 +1,17 @@
 import 'package:customers_app/screens/auth_screen/views/signup_screen.dart';
+import 'package:customers_app/screens/home_screen/views/home.dart';
+import 'package:customers_app/screens/search_screen/views/search_screen.dart';
+import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
+import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+      ChangeNotifierProvider(
+        create: (context) => GitHubData(),
+    child:  const MyApp(),)
   );
 }
 
@@ -18,9 +26,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SignupScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        home: Directionality(
+            textDirection: TextDirection.rtl, child: SignupScreen()
+            // Scaffold(body: Search(),backgroundColor: Colors.white,),)
+            ));
   }
 }
 

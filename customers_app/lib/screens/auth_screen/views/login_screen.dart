@@ -1,4 +1,5 @@
 import 'package:customers_app/screens/auth_screen/views/signup_screen.dart';
+import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:customers_app/theme/customers_theme.dart';
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(32),
                       child: Image.asset(
-                        'assets/phone.png',
+                        'lib/assets/phone.png',
                         height: 300,
                       ),
                     ),
@@ -97,32 +98,32 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: CustomersTheme
-                                .colors.primaryColor, // Button color
-                            borderRadius: BorderRadius.circular(12),
+                    // Padding(
+                    //     padding: const EdgeInsets.symmetric(horizontal: 25),
+                    //     child: Container(
+                    //       padding: const EdgeInsets.all(16),
+                    //       decoration: BoxDecoration(
+                    //         color: CustomersTheme
+                    //             .colors.primaryColor, // Button color
+                    //         borderRadius: BorderRadius.circular(12),
+                    //       ),
+                    //       child: Center(
+                    ElevatedButton(
+                        child: Text(
+                          'دخول',
+                          style: CustomersTheme.textStyles.titleLarge.copyWith(
+                            color: Colors.white, // Text color
                           ),
-                          child: Center(
-                            child: GestureDetector(
-                                child: Text(
-                                  'دخول',
-                                  style: CustomersTheme.textStyles.titleLarge
-                                      .copyWith(
-                                    color: Colors.white, // Text color
-                                  ),
-                                ),
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) {
-                                    return const HomePage();
-                                  }));
-                                }),
-                          ),
-                        )),
+                        ),
+                        onPressed: () {
+
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const MyApp22();
+                          }));
+                        }),
+                    // ),
+                    // )),
                     const SizedBox(
                       height: 15,
                     ),
