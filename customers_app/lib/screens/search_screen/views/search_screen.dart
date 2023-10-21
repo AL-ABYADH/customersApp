@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
 import 'package:flutter/services.dart';
+// ignore: unused_import
 import '../../../theme/customers_theme.dart';
 
 class SearchScreen extends StatelessWidget implements PreferredSizeWidget {

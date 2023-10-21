@@ -1,5 +1,5 @@
-import 'package:customers_app/screens/auth_screen/views/login_screen.dart';
-import 'package:customers_app/screens/auth_screen/views/signup_screen.dart';
+import 'package:customers_app/screens/auth_screen/screens/login_screen/views/login_screen.dart';
+import 'package:customers_app/screens/auth_screen/screens/sign_up_screen/views/sign_up_screen.dart';
 import 'package:customers_app/screens/home_screen/views/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,11 +1,14 @@
+// ignore_for_file: unused_import
+
 import 'package:customers_app/screens/home_screen/views/home.dart';
 import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
 import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'login_screen.dart';
+import '../../login_screen/views/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   const SignupScreen({Key? key});
 
   @override

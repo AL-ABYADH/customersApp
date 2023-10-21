@@ -1,13 +1,14 @@
-import 'package:customers_app/screens/auth_screen/views/signup_screen.dart';
+import 'package:customers_app/screens/auth_screen/screens/sign_up_screen/views/sign_up_screen.dart';
 import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:customers_app/theme/customers_theme.dart';
 
-import '../../home_screen/views/home.dart';
+// ignore: unused_import
+import '../../../../home_screen/views/home.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

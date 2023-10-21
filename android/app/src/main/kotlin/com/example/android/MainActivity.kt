@@ -1,4 +1,4 @@
-package com.trust_tech.customers_app
+package com.customersApp.android
 
 import io.flutter.embedding.android.FlutterActivity
 

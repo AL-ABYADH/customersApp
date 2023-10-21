@@ -1,8 +1,9 @@
-import 'dart:convert';
+
+
+// ignore_for_file: unused_import
 
 import 'package:customers_app/screens/home_screen/provider/brands.dart';
 import 'package:customers_app/screens/search_screen/views/search_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -153,20 +154,22 @@ class GitHubData extends ChangeNotifier {
   }
 }
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('GitHub Repository Contents'),
+        title: const Text('GitHub Repository Contents'),
       ),
       body: Consumer<GitHubData>(
         builder: (context, gitHubData, child) {
           if (gitHubData.isLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (gitHubData.data.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No data available.'),
             );
           } else {
@@ -176,8 +179,8 @@ class HomeScreen extends StatelessWidget {
                 children: gitHubData.data.map((item) {
                   return CircleAvatar(
                     child: Container(
+                      margin: const EdgeInsets.all(10),
                       child: Text(item['name']),
-                      margin: EdgeInsets.all(10),
                     ),
                   );
                 }).toList(),
