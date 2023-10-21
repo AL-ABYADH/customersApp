@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a49cc5f8-ffa9-4d1e-a416-692857db8cd3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/customers_app/lib/assets/filter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/customers_app/lib/screens/home_screen/provider/brands.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/customers_app/lib/screens/search_screen/views/search_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/assets/phone.png" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/assets/phone.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/assets/profile.png" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/assets/profile.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/lib/screens/auth_screen/controllers/auth_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/screens/auth_screen/provider/auth_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/lib/screens/auth_screen/views/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/screens/auth_screen/views/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/lib/screens/auth_screen/views/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/screens/auth_screen/views/signup_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/lib/screens/home_screen/views/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/screens/home_screen/views/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/lib/theme/customers_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/lib/theme/customers_theme.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/customers_app/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2WBnOnyspuOjODsSa61xmX01iD1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "/home/drcinco/.gradle",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/customers_app/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a49cc5f8-ffa9-4d1e-a416-692857db8cd3" name="Changes" comment="" />
+      <created>1696214814357</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696214814357</updated>
+    </task>
+    <servers />
+  </component>
+</project>
