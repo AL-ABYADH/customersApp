@@ -12,22 +12,22 @@ class CustomersTheme {
 
   // Text selection
   static const textSelectionTheme = TextSelectionThemeData(
-    cursorColor: Color.fromARGB(255, 76, 175, 80),
-    selectionColor: Color.fromARGB(79, 76, 175, 80),
-    selectionHandleColor: Color.fromARGB(255, 76, 175, 80),
+    cursorColor: Color(0xff599873),
+    selectionColor: Color(0xff9acab0),
+    selectionHandleColor: Color(0xff599873),
   );
 
   // Text button
   static final textButtonTheme = TextButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateColor.resolveWith(
-        (states) => const Color.fromARGB(255, 76, 175, 80),
+        (states) => const Color(0xff599873),
       ),
       textStyle: MaterialStateProperty.all(
         const TextStyle(
           fontFamily: 'Almarai',
           fontSize: 13,
-          color: Color.fromARGB(255, 76, 175, 80),
+          color: Color(0xff599873),
         ),
       ),
     ),
@@ -35,15 +35,15 @@ class CustomersTheme {
 }
 
 class CustomersColors {
-  Color primaryColor = const Color.fromARGB(255, 76, 175, 80);
-  Color primaryColorTransparent = const Color.fromRGBO(16, 94, 177, 0.5);
-  Color firstSecondaryColor = const Color.fromARGB(255, 81, 143, 234);
+  Color primaryColor = const Color(0xff599873);
+  Color primaryColorTransparent = const Color(0xff1565c0);
+  Color firstSecondaryColor = const Color(0xff27a2a2);
   Color secondSecondaryColor = const Color.fromARGB(255, 186, 134, 32);
-  Color successColor = const Color.fromARGB(255, 0, 109, 62);
-  Color errorColor = const Color.fromARGB(255, 155, 55, 77);
-  Color backgroundColor = const Color.fromARGB(255, 248, 250, 255);
-  Color fieldFillColor = const Color.fromARGB(255, 245, 245, 255);
-  Color displayTextColor = const Color.fromARGB(255, 27, 39, 51);
+  Color successColor = const Color(0xff008f00);
+  Color errorColor = const Color(0xffe33806);
+  Color backgroundColor = const Color(0xfff0f0f0);
+  Color fieldFillColor = const Color(0xffffffff);
+  Color displayTextColor = const Color(0xff666666);
   Color fieldLabel = Colors.grey;
 }
 
@@ -51,7 +51,7 @@ class CustomersGradients {
   LinearGradient horizontalGradient = const LinearGradient(
     colors: [
       Color.fromRGBO(26, 112, 176, 0.2),
-      Color.fromRGBO(26, 112, 176, 0.8),
+      Color(0xff1565c0),
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -60,7 +60,7 @@ class CustomersGradients {
   LinearGradient verticalGradient = const LinearGradient(
     colors: [
       Color.fromRGBO(26, 112, 176, 0.2),
-      Color.fromRGBO(26, 112, 176, 0.8),
+      Color(0xff1565c0),
     ],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -73,27 +73,27 @@ class CustomersTextStyles {
     fontFamily: 'Alexandria',
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: Color.fromARGB(255, 76, 175, 80),
+    color: Color(0xff599873),
   );
   TextStyle titleMedium = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 13,
-    color: Color.fromARGB(255, 76, 175, 80),
+    color: Color(0xff599873),
   );
   TextStyle displayLarge = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 10,
-    color: Color.fromARGB(255, 117, 117, 117),
+    color: Color(0xff666666),
   );
   TextStyle displayMedium = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 8,
-    color: Color.fromARGB(255, 117, 117, 117),
+    color: Color(0xff666666),
   );
   TextStyle labelSmall = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 10,
-    color: Color.fromARGB(255, 117, 117, 117),
+    color: Color(0xff666666),
   );
   TextStyle fieldError = TextStyle(
     fontFamily: 'Alexandria',

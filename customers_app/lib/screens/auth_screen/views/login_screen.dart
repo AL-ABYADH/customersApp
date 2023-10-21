@@ -1,6 +1,10 @@
+import 'package:customers_app/screens/auth_screen/views/signup_screen.dart';
+import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:customers_app/theme/customers_theme.dart';
+
+import '../../home_screen/views/home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key});
@@ -28,13 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ClipRRect(
+                      borderRadius: BorderRadius.circular(32),
                       child: Image.asset(
-                        'assets/phone.png',
+                        'lib/assets/phone.png',
                         height: 300,
                       ),
-                      borderRadius: BorderRadius.circular(32),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Text(
@@ -48,28 +52,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       ' نشكركم على ثقتكم بخدماتنا',
                       style: CustomersTheme.textStyles.titleLarge,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
                         decoration: BoxDecoration(
-                           color: CustomersTheme.colors.fieldFillColor,
+                          color: CustomersTheme.colors.fieldFillColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'الإسم',
+                              hintText: "رقم الهاتف",
                             ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -79,8 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: CustomersTheme.colors.fieldFillColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             obscureText: true,
                             decoration: InputDecoration(
@@ -91,31 +95,36 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color:
-                              CustomersTheme.colors.primaryColor, // Button color
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        
-                        child: Center(
-                          
-                          child: Text(
-                            'دخول',
-                            style: CustomersTheme.textStyles.titleLarge.copyWith(
-                              color: Colors.white, // Text color
-                            ),
+                    // Padding(
+                    //     padding: const EdgeInsets.symmetric(horizontal: 25),
+                    //     child: Container(
+                    //       padding: const EdgeInsets.all(16),
+                    //       decoration: BoxDecoration(
+                    //         color: CustomersTheme
+                    //             .colors.primaryColor, // Button color
+                    //         borderRadius: BorderRadius.circular(12),
+                    //       ),
+                    //       child: Center(
+                    ElevatedButton(
+                        child: Text(
+                          'دخول',
+                          style: CustomersTheme.textStyles.titleLarge.copyWith(
+                            color: Colors.white, // Text color
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
+                        onPressed: () {
+
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const MyApp22();
+                          }));
+                        }),
+                    // ),
+                    // )),
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -129,15 +138,25 @@ class _LoginScreenState extends State<LoginScreen> {
                           textAlign: TextAlign.right, // Apply textAlign here
                         ),
                         // You can add any other widgets here if needed
-                        Text(
-                          '  إنشاء حساب ',
-                          style: CustomersTheme.textStyles.titleMedium.copyWith(
-                            color: CustomersTheme.colors
-                                .firstSecondaryColor, // Use primaryColor from CustomersTheme.colors
+                        GestureDetector(
+                          child: Text(
+                            '  إنشاء حساب ',
+                            style:
+                                CustomersTheme.textStyles.titleMedium.copyWith(
+                              color: CustomersTheme.colors
+                                  .firstSecondaryColor, // Use primaryColor from CustomersTheme.colors
+                            ),
                           ),
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return const SignupScreen();
+                            }));
+                          },
                         ),
-                        SizedBox(height: 15,),
-    
+                        const SizedBox(
+                          height: 15,
+                        ),
                       ],
                     ),
                   ],
