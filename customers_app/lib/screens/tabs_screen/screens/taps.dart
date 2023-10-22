@@ -10,7 +10,7 @@ List<Widget> _buildScreens() {
   return [
     const LoginScreen(),
     const LoginScreen(),
-     HomeScreen(),
+    const HomeScreen(),
     const Drawer()
   ];
 }

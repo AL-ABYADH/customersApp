@@ -16,6 +16,6 @@ class AuthScreen extends StatelessWidget {
         ? ChangeNotifierProvider.value(
             value: LoginProvider(), child: const LoginScreen())
         : ChangeNotifierProvider.value(
-            value: SignUpProvider(), child: const SignupScreen());
+            value: SignUpProvider(), child: const SignUpScreen());
   }
 }

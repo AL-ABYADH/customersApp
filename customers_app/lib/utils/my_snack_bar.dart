@@ -37,7 +37,7 @@ class MySnackBar extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               content,
-              style: CustomersTheme.textStyles.displayLarge,
+              style: CustomersTheme.textStyles.display,
             )
           ],
         ),

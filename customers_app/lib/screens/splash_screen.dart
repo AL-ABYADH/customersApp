@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Text(
             'جار التحميل...',
-            style: CustomersTheme.textStyles.displayLarge,
+            style: CustomersTheme.textStyles.display,
           ),
         ),
       ),

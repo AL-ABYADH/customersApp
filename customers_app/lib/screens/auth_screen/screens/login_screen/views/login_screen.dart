@@ -1,130 +1,70 @@
-import 'package:customers_app/screens/auth_screen/screens/sign_up_screen/views/sign_up_screen.dart';
-import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:customers_app/theme/customers_theme.dart';
+import 'package:provider/provider.dart';
 
-// ignore: unused_import
-import '../../../../home_screen/views/home.dart';
+import '../../../../../theme/customers_theme.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../views/widgets/auth_button.dart';
+import '../../../views/widgets/auth_field.dart';
+import '../providers/login_provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context, listen: false);
+
     return Directionality(
-      textDirection: TextDirection.rtl, // Set text direction to RTL
+      textDirection: TextDirection.rtl,
       child: Theme(
         data: ThemeData(
           primaryColor: CustomersTheme.colors.primaryColor,
-          // Add more theme properties as needed
         ),
         child: Scaffold(
           backgroundColor: CustomersTheme.colors.backgroundColor,
           body: SafeArea(
-            child: SingleChildScrollView(
-              child: Center(
+            child: Form(
+              key: loginProvider.formKey,
+              child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(32),
-                      child: Image.asset(
-                        'lib/assets/phone.png',
-                        height: 300,
-                      ),
-                    ),
                     const SizedBox(
-                      height: 15,
+                      height: 50,
                     ),
                     Text(
                       'تسجيل الدخول',
-                      style: GoogleFonts.robotoCondensed(
-                        fontSize: 38,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      ' نشكركم على ثقتكم بخدماتنا',
                       style: CustomersTheme.textStyles.titleLarge,
                     ),
                     const SizedBox(
                       height: 50,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.fieldFillColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "رقم الهاتف",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.fieldFillColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: ' كلمة السر',
-                            ),
-                          ),
-                        ),
-                      ),
+                    AuthField(
+                      decoration:
+                          CustomersInputDecoration.login(label: 'اسم المستخدم'),
+                      inputType: TextInputType.text,
+                      controller: loginProvider.usernameController,
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    // Padding(
-                    //     padding: const EdgeInsets.symmetric(horizontal: 25),
-                    //     child: Container(
-                    //       padding: const EdgeInsets.all(16),
-                    //       decoration: BoxDecoration(
-                    //         color: CustomersTheme
-                    //             .colors.primaryColor, // Button color
-                    //         borderRadius: BorderRadius.circular(12),
-                    //       ),
-                    //       child: Center(
-                    ElevatedButton(
-                        child: Text(
-                          'دخول',
-                          style: CustomersTheme.textStyles.titleLarge.copyWith(
-                            color: Colors.white, // Text color
-                          ),
-                        ),
-                        onPressed: () {
-
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const MyApp22();
-                          }));
-                        }),
-                    // ),
-                    // )),
+                    AuthField(
+                      decoration:
+                          CustomersInputDecoration.login(label: 'كلمة المرور'),
+                      inputType: TextInputType.text,
+                      controller: loginProvider.passwordController,
+                      obscureText: true,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Consumer<LoginProvider>(
+                        builder: (context, loginConsumer, _) {
+                      return AuthButton(
+                          label: 'دخول',
+                          onClick: loginConsumer.isLoading
+                              ? null
+                              : () => loginProvider.login(context: context));
+                    }),
                     const SizedBox(
                       height: 15,
                     ),
@@ -136,29 +76,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: CustomersTheme.textStyles.titleMedium.copyWith(
                             color: CustomersTheme.colors.displayTextColor,
                           ),
-                          textAlign: TextAlign.right, // Apply textAlign here
-                        ),
-                        // You can add any other widgets here if needed
-                        GestureDetector(
-                          child: Text(
-                            '  إنشاء حساب ',
-                            style:
-                                CustomersTheme.textStyles.titleMedium.copyWith(
-                              color: CustomersTheme.colors
-                                  .firstSecondaryColor, // Use primaryColor from CustomersTheme.colors
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const SignupScreen();
-                            }));
-                          },
+                          textAlign: TextAlign.right,
                         ),
                         const SizedBox(
-                          height: 15,
+                          width: 7,
+                        ),
+                        TextButton(
+                          child: Text(
+                            'إنشاء حساب',
+                            style: CustomersTheme.textStyles.titleMedium,
+                          ),
+                          onPressed: () =>
+                              Provider.of<AuthProvider>(context, listen: false)
+                                  .switchScreen('signUp'),
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 25,
                     ),
                   ],
                 ),

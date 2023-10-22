@@ -1,23 +1,24 @@
-// ignore_for_file: unused_import
-
-import 'package:customers_app/screens/home_screen/views/home.dart';
-import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
-import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../login_screen/views/login_screen.dart';
+import '../../../../../theme/customers_theme.dart';
+import '../../../views/widgets/auth_field.dart';
+import '../../../views/widgets/auth_button.dart';
+import '../../../providers/auth_provider.dart';
+import '../providers/sign_up_provider.dart';
 
-class SignupScreen extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const SignupScreen({Key? key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
+    final signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Theme(
@@ -27,20 +28,14 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Scaffold(
           backgroundColor: CustomersTheme.colors.backgroundColor,
           body: SafeArea(
-            child: SingleChildScrollView(
-              child: Center(
+            child: Form(
+              key: signUpProvider.formKey,
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(32),
-                      child: Image.asset(
-                        "lib/assets/profile.png",
-                        height: 300,
-                      ),
-                    ),
                     const SizedBox(
-                      height: 15,
+                      height: 50,
                     ),
                     Text(
                       'قم بتعبئة البيانات التالية',
@@ -51,241 +46,51 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 50,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.fieldFillColor,
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'الإسم',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.fieldFillColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'رقم الهاتف',
-                            ),
-                          ),
-                        ),
-                      ),
+                    AuthField(
+                      decoration:
+                          CustomersInputDecoration.login(label: 'اسم المستخدم'),
+                      inputType: TextInputType.text,
+                      controller: signUpProvider.usernameController,
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.fieldFillColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'كلمة السر',
-                            ),
-                          ),
-                        ),
-                      ),
+                    AuthField(
+                      decoration:
+                          CustomersInputDecoration.login(label: 'الاسم الكامل'),
+                      inputType: TextInputType.text,
+                      controller: signUpProvider.fullNameController,
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.fieldFillColor,
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'اسم ومكان الحي (المنطقة)'),
-                          ),
-                        ),
-                      ),
+                    AuthField(
+                      decoration:
+                          CustomersInputDecoration.login(label: 'رقم الهاتف'),
+                      inputType: TextInputType.number,
+                      controller: signUpProvider.phoneNumberController,
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: CustomersTheme.colors.fieldFillColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () => () {},
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              CustomersTheme.colors.fieldFillColor,
-                            ),
-                            minimumSize: MaterialStateProperty.all<Size>(
-                              const Size.fromHeight(
-                                48.0,
-                              ), // Adjust the height as needed
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            // Align children to start and end
-                            children: [
-                              Text(
-                                'ادراج صورة',
-                                style: TextStyle(
-                                  color: CustomersTheme.colors.primaryColor,
-                                  fontSize: 13, // Match the text style
-                                ),
-                              ),
-                              Icon(
-                                Icons.image_outlined,
-                                color: CustomersTheme.colors.primaryColor,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    AuthField(
+                      decoration:
+                          CustomersInputDecoration.login(label: 'كلمة المرور'),
+                      inputType: TextInputType.text,
+                      controller: signUpProvider.passwordController,
+                      obscureText: true,
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CustomersTheme.colors.fieldFillColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () => () {},
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                CustomersTheme.colors.fieldFillColor,
-                              ),
-                              minimumSize: MaterialStateProperty.all<Size>(
-                                const Size.fromHeight(
-                                  48.0,
-                                ), // Adjust the height as needed
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              // Align children to start and end
-                              children: [
-                                Text(
-                                  'حدد العنوان على الخريطة',
-                                  style: TextStyle(
-                                    color: CustomersTheme.colors.primaryColor,
-                                    fontSize: 13, // Match the text style
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.map_outlined,
-                                  color: CustomersTheme.colors.primaryColor,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: GestureDetector(
-                        onTap: () {
-                          // Add your currency selection functionality here
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CustomersTheme.colors.fieldFillColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Add your currency selection functionality here
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                CustomersTheme.colors.fieldFillColor,
-                              ),
-                              minimumSize: MaterialStateProperty.all<Size>(
-                                const Size.fromHeight(
-                                  48.0,
-                                ), // Adjust the height as needed
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              // Align children to start and end
-                              children: [
-                                Text(
-                                  'اختر العملة (دولار أمريكي / ريال سعودي / ريال يمني)',
-                                  style: TextStyle(
-                                    color: CustomersTheme.colors.primaryColor,
-                                    fontSize: 13, // Match the text style
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.attach_money,
-                                  color: CustomersTheme.colors.primaryColor,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    ElevatedButton(
-                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(CustomersTheme.colors.primaryColor)),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const MyApp22();
-                          }));
-                        },
-                        child: Text(
-                          'تسجيل',
-                          style: CustomersTheme.textStyles.titleLarge.copyWith(
-                            color: Colors.white,
-                          ),
-                        )),
-                    // ),
-                    // )),
+                    Consumer<SignUpProvider>(
+                        builder: (context, signUpProvider, _) {
+                      return AuthButton(
+                          label: 'دخول',
+                          onClick: signUpProvider.isLoading
+                              ? null
+                              : () => signUpProvider.signUp(context: context));
+                    }),
                     const SizedBox(
                       height: 15,
                     ),
@@ -293,32 +98,29 @@ class _SignupScreenState extends State<SignupScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          ' هل تمتلك حساب بالفعل؟',
+                          'هل تمتلك حساب بالفعل؟',
                           style: CustomersTheme.textStyles.titleMedium.copyWith(
                             color: CustomersTheme.colors.displayTextColor,
                           ),
                           textAlign: TextAlign.right,
                         ),
-                        GestureDetector(
+                        const SizedBox(
+                          width: 7,
+                        ),
+                        TextButton(
                           child: Text(
-                            '  تسجيل الدخول ',
-                            style:
-                                CustomersTheme.textStyles.titleMedium.copyWith(
-                              color: CustomersTheme.colors.firstSecondaryColor,
-                            ),
+                            'تسجيل الدخول ',
+                            style: CustomersTheme.textStyles.titleMedium,
                           ),
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const LoginScreen();
-                            }));
-                          },
+                          onPressed: () =>
+                              Provider.of<AuthProvider>(context, listen: false)
+                                  .switchScreen('login'),
                         ),
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
-                    )
+                      height: 25,
+                    ),
                   ],
                 ),
               ),

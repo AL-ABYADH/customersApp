@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomersTheme {
+  // Border radius
+  static const double radius = 12;
+
   // Colors
   static final CustomersColors colors = CustomersColors();
 
@@ -13,7 +16,7 @@ class CustomersTheme {
   // Text selection
   static const textSelectionTheme = TextSelectionThemeData(
     cursorColor: Color(0xff599873),
-    selectionColor: Color(0xff9acab0),
+    selectionColor: Color.fromRGBO(89, 152, 115, 0.3),
     selectionHandleColor: Color(0xff599873),
   );
 
@@ -36,14 +39,14 @@ class CustomersTheme {
 
 class CustomersColors {
   Color primaryColor = const Color(0xff599873);
-  Color primaryColorTransparent = const Color(0xff1565c0);
-  Color firstSecondaryColor = const Color(0xff27a2a2);
+  Color primaryColorTransparent = const Color.fromRGBO(16, 94, 177, 0.5);
+  Color firstSecondaryColor = const Color.fromARGB(255, 81, 143, 234);
   Color secondSecondaryColor = const Color.fromARGB(255, 186, 134, 32);
-  Color successColor = const Color(0xff008f00);
-  Color errorColor = const Color(0xffe33806);
-  Color backgroundColor = const Color(0xfff0f0f0);
-  Color fieldFillColor = const Color(0xffffffff);
-  Color displayTextColor = const Color(0xff666666);
+  Color successColor = const Color.fromARGB(255, 0, 109, 62);
+  Color errorColor = const Color.fromARGB(255, 155, 55, 77);
+  Color backgroundColor = const Color.fromARGB(255, 248, 250, 255);
+  Color fieldFillColor = const Color.fromARGB(255, 245, 245, 255);
+  Color displayTextColor = const Color.fromARGB(255, 34, 46, 39);
   Color fieldLabel = Colors.grey;
 }
 
@@ -51,7 +54,7 @@ class CustomersGradients {
   LinearGradient horizontalGradient = const LinearGradient(
     colors: [
       Color.fromRGBO(26, 112, 176, 0.2),
-      Color(0xff1565c0),
+      Color.fromRGBO(26, 112, 176, 0.8),
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -60,7 +63,7 @@ class CustomersGradients {
   LinearGradient verticalGradient = const LinearGradient(
     colors: [
       Color.fromRGBO(26, 112, 176, 0.2),
-      Color(0xff1565c0),
+      Color.fromRGBO(26, 112, 176, 0.8),
     ],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -80,20 +83,20 @@ class CustomersTextStyles {
     fontSize: 13,
     color: Color(0xff599873),
   );
-  TextStyle displayLarge = const TextStyle(
+  TextStyle display = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 10,
-    color: Color(0xff666666),
+    color: Color.fromARGB(255, 117, 117, 117),
   );
   TextStyle displayMedium = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 8,
-    color: Color(0xff666666),
+    color: Color.fromARGB(255, 117, 117, 117),
   );
   TextStyle labelSmall = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 10,
-    color: Color(0xff666666),
+    color: Color.fromARGB(255, 117, 117, 117),
   );
   TextStyle fieldError = TextStyle(
     fontFamily: 'Alexandria',
@@ -102,27 +105,18 @@ class CustomersTextStyles {
   );
   TextStyle fieldLabel = TextStyle(
     fontFamily: 'Alexandria',
-    fontSize: 10,
+    fontSize: 13,
     color: CustomersTheme.colors.fieldLabel,
   );
 }
 
 class CustomersInputDecoration extends InputDecoration {
   // Login credentials fields
-  CustomersInputDecoration.login({required String label, required String icon})
+  CustomersInputDecoration.login({required String label})
       : super(
           labelText: label,
           errorStyle: CustomersTheme.textStyles.fieldError,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-          suffixIcon: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Image.asset(
-              'lib/assets/icons/$icon.png', // Assuming the icon is a PNG file
-              color: CustomersTheme.colors.primaryColor,
-              height: 15,
-              width: 15,
-            ),
-          ),
           labelStyle: CustomersTheme.textStyles.fieldLabel,
           border: const OutlineInputBorder(
               borderSide: BorderSide.none,
