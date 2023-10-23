@@ -1,19 +1,26 @@
-import 'package:customers_app/screens/tabs_screen/screens/taps.dart';
+// ignore_for_file: unused_import
+
+import 'package:customers_app/screens/tabs_screen/views/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+
+
 import './api/firebase_api.dart';
 import './screens/auth_screen/views/auth_screen.dart';
 import './screens/auth_screen/providers/auth_provider.dart';
 import './providers/user_provider.dart';
 import './screens/splash_screen.dart';
-import './screens/home_screen/views/home.dart';
-import './screens/home_screen/provider/home_provider.dart';
+import 'screens/tabs_screen/providers/tabs_provider.dart';
+import 'screens/tabs_screen/screens/home_screen/views/home_screen.dart';
+import 'screens/tabs_screen/screens/home_screen/provider/home_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseAPI().initPushAndLocalNotifications('test_topic');
+  await dotenv.load(fileName: 'lib/.env');
   runApp(
     const MyApp(),
   );
@@ -24,17 +31,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return MaterialApp(home: TabsScreen(),);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => UserProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => TabsProvider(),
+        ),
       ],
       child: Consumer<UserProvider>(builder: (context, userConsumer, _) {
         return MaterialApp(
+          title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
+          locale: const Locale('ar', 'YE'),
+          supportedLocales: const [
+            Locale('ar', 'YE'),
+          ],
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
           home: userConsumer.isAuth
-              ? Builder(builder: (context) => const MyApp22())
+              ? Builder(builder: (context) =>  TabsScreen())
               : FutureBuilder(
                   future: Future.delayed(const Duration(milliseconds: 2000),
                       () => userConsumer.tryAutoLogin()),

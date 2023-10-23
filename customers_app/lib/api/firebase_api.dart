@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage? message) async {
   if (message == null) return;
+  // ignore: avoid_print
   print(message.data);
 }
 
@@ -68,18 +69,17 @@ class FirebaseAPI {
     });
   }
 
-  void initPushAndLocalNotifications(String userId) {
+  void initPushAndLocalNotifications() {
     initPushNotifications();
     initLocalNotifications();
-    initNotifications(userId);
   }
 
-  Future<void> initNotifications(String userId) async {
+  Future<void> initNotifications(int userId) async {
     await _firebaseMessaging.requestPermission();
 
-    await _firebaseMessaging.subscribeToTopic(userId);
+    await _firebaseMessaging.subscribeToTopic('user_$userId');
 
-    initPushAndLocalNotifications(userId);
+    initPushAndLocalNotifications();
   }
 
   Future<void> unsubscribe(int userId) async {

@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user.dart';
@@ -13,8 +11,8 @@ class UserProvider with ChangeNotifier {
   User? _user;
 
   bool get isAuth {
-    // return token != null
-    return true;
+    return token != null;
+    // return true;
   }
 
   int? get userId {
@@ -27,6 +25,10 @@ class UserProvider with ChangeNotifier {
 
   String? get username {
     return _user!.username;
+  }
+
+  String? get phoneNumber {
+    return _user!.phoneNumber;
   }
 
   String? get imageUrl {
@@ -55,6 +57,7 @@ class UserProvider with ChangeNotifier {
     required String username,
     required int userId,
     required String name,
+    required String phoneNumber,
     required String? imageUrl,
   }) async {
     _user = User(
@@ -62,6 +65,7 @@ class UserProvider with ChangeNotifier {
       userId: userId,
       username: username,
       name: name,
+      phoneNumber: phoneNumber,
       imageUrl: imageUrl,
     );
     notifyListeners();
@@ -72,6 +76,7 @@ class UserProvider with ChangeNotifier {
       'userId': _user!.userId,
       'name': _user!.name,
       'username': _user!.username,
+      'phoneNumber': _user!.phoneNumber,
       'imageUrl': _user!.imageUrl,
     });
     prefs.setString('userData', userData);
@@ -88,6 +93,7 @@ class UserProvider with ChangeNotifier {
     final token = extractedUserData['token'] as String;
     final userId = extractedUserData['userId'] as int;
     final name = extractedUserData['name'] as String;
+    final phoneNumber = extractedUserData['phoneNumber'] as String;
     final username = extractedUserData['username'] as String;
     final imageUrl = extractedUserData['imageUrl'] as String?;
 
@@ -96,6 +102,7 @@ class UserProvider with ChangeNotifier {
       userId: userId,
       username: username,
       name: name,
+      phoneNumber: phoneNumber,
       imageUrl: imageUrl,
     );
 

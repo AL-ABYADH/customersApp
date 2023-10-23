@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../../../../theme/customers_theme.dart';
+import '../theme/customers_theme.dart';
 
-class AuthButton extends StatelessWidget {
-  final String label;
+class MyButton extends StatelessWidget {
+  final Widget child;
   final void Function()? onClick;
 
-  const AuthButton({
-    required this.label,
+  const MyButton({
+    required this.child,
     required this.onClick,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+    return SizedBox(
+      height: 56,
       child: ElevatedButton(
         onPressed: onClick,
         style: ButtonStyle(
@@ -28,12 +28,7 @@ class AuthButton extends StatelessWidget {
               MaterialStateProperty.all(CustomersTheme.colors.primaryColor),
         ),
         child: Center(
-          child: Text(
-            label,
-            style: CustomersTheme.textStyles.titleLarge.copyWith(
-              color: Colors.white,
-            ),
-          ),
+          child: child,
         ),
       ),
     );

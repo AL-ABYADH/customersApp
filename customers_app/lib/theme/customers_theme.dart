@@ -47,6 +47,8 @@ class CustomersColors {
   Color backgroundColor = const Color.fromARGB(255, 248, 250, 255);
   Color fieldFillColor = const Color.fromARGB(255, 245, 245, 255);
   Color displayTextColor = const Color.fromARGB(255, 34, 46, 39);
+  Color dialogNoteColor = const Color.fromARGB(255, 126, 126, 126);
+  Color fieldContentColor = const Color(0xff599873);
   Color fieldLabel = Colors.grey;
 }
 
@@ -108,6 +110,35 @@ class CustomersTextStyles {
     fontSize: 13,
     color: CustomersTheme.colors.fieldLabel,
   );
+  TextStyle dialogLabel = TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 13,
+    color: CustomersTheme.colors.displayTextColor,
+    decoration: TextDecoration.none,
+    fontWeight: FontWeight.w200,
+    height: 2,
+  );
+  TextStyle dialogNote = TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 10,
+    color: CustomersTheme.colors.dialogNoteColor,
+    decoration: TextDecoration.none,
+    fontWeight: FontWeight.w200,
+    height: 2,
+  );
+  TextStyle dialogButtonText = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 10,
+    fontWeight: FontWeight.w100,
+    decoration: TextDecoration.none,
+    color: Colors.white,
+  );
+  TextStyle fieldContent = TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 13,
+    color: CustomersTheme.colors.fieldContentColor,
+    decoration: TextDecoration.none,
+  );
 }
 
 class CustomersInputDecoration extends InputDecoration {
@@ -120,7 +151,8 @@ class CustomersInputDecoration extends InputDecoration {
           labelStyle: CustomersTheme.textStyles.fieldLabel,
           border: const OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8))),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(CustomersTheme.radius))),
           filled: true,
           fillColor: CustomersTheme.colors.fieldFillColor,
         );
@@ -137,7 +169,8 @@ class CustomersInputDecoration extends InputDecoration {
           labelStyle: CustomersTheme.textStyles.fieldLabel,
           border: const OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8))),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(CustomersTheme.radius))),
           filled: true,
           fillColor: CustomersTheme.colors.fieldFillColor,
         );
@@ -160,8 +193,22 @@ class CustomersInputDecoration extends InputDecoration {
           labelStyle: CustomersTheme.textStyles.fieldLabel,
           border: const OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8))),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(CustomersTheme.radius))),
           filled: true,
           fillColor: CustomersTheme.colors.fieldFillColor,
         );
+
+  CustomersInputDecoration.dropdown({required String label})
+      : super(
+            labelText: label,
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            labelStyle: CustomersTheme.textStyles.fieldLabel,
+            border: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius:
+                  BorderRadius.all(Radius.circular(CustomersTheme.radius)),
+            ),
+            filled: true,
+            fillColor: const Color.fromARGB(255, 245, 245, 255));
 }

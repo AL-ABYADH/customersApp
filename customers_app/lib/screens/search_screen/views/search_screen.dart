@@ -1,87 +1,47 @@
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/services.dart';
-// ignore: unused_import
-import '../../../theme/customers_theme.dart';
 
 class SearchScreen extends StatelessWidget implements PreferredSizeWidget {
-  const SearchScreen({super.key});
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    //     statusBarColor: Color(0xfff0f0f0),
-    //     statusBarBrightness: Brightness.dark));
     return Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: const Color(0xfff0f0f0),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(50),
+          child: AppBar(
             backgroundColor: const Color(0xfff0f0f0),
-            // backgroundColor: CustomersTheme.colors.backgroundColor,
-            // appBar: AppBar(backgroundColor: CustomersTheme.colors.backgroundColor,elevation: 0.0,),
-            appBar: PreferredSize(preferredSize: Size.fromHeight(50),
-            child:Row(
+            elevation: 0.0,
+            automaticallyImplyLeading: false,
+            title: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+              ),
+              child: Row(
                 children: [
-            Expanded(
-            child: GestureDetector(
-            child: Container(
-            decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-          color: Colors.white,
-        ),
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          const Icon(Icons.search),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: const Text("ابحث عن جهاز"),
+                  Icon(Icons.search),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: const Text("ابحث عن جهاز"),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ],
+        ),
       ),
-    ),))])
-            // AppBar(
-            //     backgroundColor: const Color(0xfff0f0f0),
-            //     elevation: 0.0,
-            //     automaticallyImplyLeading: false,
-            //     title: const TextField(
-            //       decoration: InputDecoration(
-            //           prefixIcon: Icon(Icons.search),
-            //           border: InputBorder.none,
-            //           fillColor: Color(0xfff8f8f9),
-            //           filled: true,
-            //           iconColor: Colors.black),
-            //     ),
-            //     actions: [
-            //       TextButton(
-            //           onPressed: () {
-            //             Navigator.pop(context, false);
-            //           },
-            //           child: const Text("إلغاء"))
-            //     ],
-            //   ),
-            )));
-    // ))));
-    // Container(
-    //       decoration: BoxDecoration(
-    //         borderRadius: BorderRadius.circular(5),
-    //         color: Colors.white,
-    //       ),
-    //       margin: const EdgeInsets.only(left: 10),
-    //       padding: const EdgeInsets.all(5),
-    //       child: Text("cancel"),
-    //     )
-    // ],
-    // ),
-    // );
+    );
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize {
     return const Size.fromHeight(kToolbarHeight);
   }
 }
+
 //
 // // class DataSearch extends SearchDelegate{
 // //   @override
