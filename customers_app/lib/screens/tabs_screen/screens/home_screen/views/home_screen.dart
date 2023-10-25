@@ -1,17 +1,13 @@
-
-
-// ignore_for_file: unused_import
-
-import 'package:customers_app/screens/tabs_screen/screens/home_screen/providers/brands.dart';
-import 'package:customers_app/screens/search_screen/views/search_screen.dart';
-import 'package:customers_app/theme/customers_theme.dart';
+import 'package:customers_app/screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:http/http.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../screens/search_screen/views/search_screen.dart';
+import '../../../../../theme/customers_theme.dart';
+import './widgets/product_items_row.dart';
+import '../../../../../models/product_item.dart';
 
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   // Future<List<String>> fetchBrands() async {
@@ -34,9 +30,13 @@ class HomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //     statusBarColor: CustomersTheme.colors.fieldFillColor,
-    //     statusBarBrightness: Brightness.dark));
+    final homeProvider = Provider.of<HomeProvider>(context);
+
+    final Map<String, List<ProductItem>> productItemsRows = {
+      'الأحدث في المتجر': homeProvider.recentlyAddedItems,
+      'الأعلى تقييماً': homeProvider.highRatedItems,
+    };
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -56,23 +56,20 @@ class HomeScreen extends StatelessWidget{
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        const Icon(Icons.search),
+                        const Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: const Text("ابحث عن جهاز"),
+                          child: Text('ابحث عن جهاز',
+                              style: CustomersTheme.textStyles.fieldLabel),
                         ),
                       ],
                     ),
                   ),
                   onTap: () {
-                    // showSearch(context: context, delegate: DataSearch());
-                    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-                    //     statusBarColor: Colors.transparent,
-                    //     statusBarBrightness: Brightness.light));
-                    PersistentNavBarNavigator.pushNewScreen(context,
-                        screen: const SearchScreen(),
-                        withNavBar: false,
-                        pageTransitionAnimation: PageTransitionAnimation.fade);
+                    Navigator.of(context).pushNamed(SearchScreen.routeName);
                   },
                 )),
                 GestureDetector(
@@ -92,18 +89,29 @@ class HomeScreen extends StatelessWidget{
                 ))
               ],
             ),
-            const SizedBox(height: 15,),
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: Row(
-            //     children: List<Widget>.generate(10, (index) =>
-            //       Padding(padding: const EdgeInsets.all(10),child: CircleAvatar(backgroundColor: CustomersTheme.colors.primaryColor,),),
-            //     ),
-            //   ),
-            // )
-            // FutureBuilder<String>(future:fetchBrands(),builder: (BuildContext context,AsyncSnap),){
-
-            // }
+            Expanded(
+                child: ListView(
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                ProductItemsRow(
+                  label:
+                      productItemsRows.keys.toList()[0], // 'الأحدث في المتجر'
+                  productItems: productItemsRows.values.toList()[0],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ProductItemsRow(
+                  label: productItemsRows.keys.toList()[1], // 'الأعلى تقييماً'
+                  productItems: productItemsRows.values.toList()[1],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ))
           ],
         ),
       ),

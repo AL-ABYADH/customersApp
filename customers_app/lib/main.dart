@@ -7,15 +7,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-
 import './api/firebase_api.dart';
 import './screens/auth_screen/views/auth_screen.dart';
 import './screens/auth_screen/providers/auth_provider.dart';
 import './providers/user_provider.dart';
 import './screens/splash_screen.dart';
-import 'screens/tabs_screen/providers/tabs_provider.dart';
-import 'screens/tabs_screen/screens/home_screen/views/home_screen.dart';
-import 'screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
+import './screens/tabs_screen/providers/tabs_provider.dart';
+import './screens/tabs_screen/screens/home_screen/views/home_screen.dart';
+import './screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
+import './screens/search_screen/views/search_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           home: userConsumer.isAuth
-              ? Builder(builder: (context) =>  TabsScreen())
+              ? Builder(builder: (context) => TabsScreen())
               : FutureBuilder(
                   future: Future.delayed(const Duration(milliseconds: 2000),
                       () => userConsumer.tryAutoLogin()),
@@ -66,6 +66,9 @@ class MyApp extends StatelessWidget {
                           : ChangeNotifierProvider.value(
                               value: AuthProvider(), child: const AuthScreen()),
                 ),
+          routes: {
+            SearchScreen.routeName: (ctx) => const SearchScreen(),
+          },
         );
       }),
     );
