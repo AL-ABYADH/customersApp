@@ -15,7 +15,6 @@ class MyBottomNavBar extends StatelessWidget {
         onTap: tabsScreenConsumer.selectPage,
         // Set the size of the labels to zero to hide them and apply a custom label
         selectedLabelStyle: const TextStyle(fontSize: 0),
-        // elevation: 0,
         unselectedLabelStyle: const TextStyle(fontSize: 0),
         backgroundColor: CustomersTheme.colors.backgroundColor,
         unselectedItemColor: Colors.grey,
