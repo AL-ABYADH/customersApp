@@ -2,7 +2,7 @@
 
 // ignore_for_file: unused_import
 
-import 'package:customers_app/screens/tabs_screen/screens/home_screen/provider/brands.dart';
+import 'package:customers_app/screens/tabs_screen/screens/home_screen/providers/brands.dart';
 import 'package:customers_app/screens/search_screen/views/search_screen.dart';
 import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';

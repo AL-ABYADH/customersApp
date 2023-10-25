@@ -1,13 +1,12 @@
-// ignore_for_file: unnecessary_import, unused_import, unused_element
+// ignore_for_file: unused_import
 
-import 'package:customers_app/screens/auth_screen/screens/login_screen/providers/login_provider.dart';
-import 'package:customers_app/screens/auth_screen/screens/login_screen/views/login_screen.dart';
-import 'package:customers_app/screens/auth_screen/screens/sign_up_screen/views/sign_up_screen.dart';
 import 'package:customers_app/screens/tabs_screen/screens/home_screen/views/home_screen.dart';
-import 'package:customers_app/screens/tabs_screen/screens/home_screen/provider/home_provider.dart';
-
+import 'package:customers_app/screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../screens/my_orders_screen/providers/my_order_provider.dart';
+import '../screens/my_orders_screen/views/my_order_screen.dart';
+
 import '../../../theme/customers_theme.dart';
 
 class TabsProvider with ChangeNotifier {
@@ -21,8 +20,8 @@ class TabsProvider with ChangeNotifier {
       child: const HomeScreen(),
     ),
     ChangeNotifierProvider.value(
-      value: HomeProvider(),
-      child: const HomeScreen(),
+      value: MyOrdersProvider(),
+      child: const MyOrdersScreen(),
     ),
   ];
 

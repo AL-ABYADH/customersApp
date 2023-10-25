@@ -15,7 +15,7 @@ import './providers/user_provider.dart';
 import './screens/splash_screen.dart';
 import 'screens/tabs_screen/providers/tabs_provider.dart';
 import 'screens/tabs_screen/screens/home_screen/views/home_screen.dart';
-import 'screens/tabs_screen/screens/home_screen/provider/home_provider.dart';
+import 'screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
