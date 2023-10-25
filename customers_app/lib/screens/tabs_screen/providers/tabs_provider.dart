@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/my_orders_screen/providers/my_order_provider.dart';
+import '../screens/my_orders_screen/views/my_order_screen.dart';
 import '../screens/home_screen/views/home_screen.dart';
 import '../screens/home_screen/providers/home_provider.dart';
-import '../screens/brows_screen.dart/views/brows_screen.dart';
-import '../screens/brows_screen.dart/providers/brows_provider.dart';
 
 class TabsProvider with ChangeNotifier {
   List<Widget> pages = [
@@ -13,12 +13,12 @@ class TabsProvider with ChangeNotifier {
       child: const HomeScreen(),
     ),
     ChangeNotifierProvider.value(
-      value: BrowsProvider(),
-      child: const BrowsScreen(),
-    ),
-    ChangeNotifierProvider.value(
       value: HomeProvider(),
       child: const HomeScreen(),
+    ),
+    ChangeNotifierProvider.value(
+      value: MyOrdersProvider(),
+      child: const MyOrdersScreen(),
     ),
   ];
 

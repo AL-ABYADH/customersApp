@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:customers_app/screens/tabs_screen/views/tabs_screen.dart';
+import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
