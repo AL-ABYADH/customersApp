@@ -16,7 +16,7 @@ class ProductItemsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductItemCard> items = [];
+    List<Widget> items = [];
     for (final item in productItems) {
       items.add(ProductItemCard(item: item));
     }
