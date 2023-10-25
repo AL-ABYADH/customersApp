@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../theme/customers_theme.dart';
+
 class SearchScreen extends StatelessWidget implements PreferredSizeWidget {
   static const routeName = 'search-screen';
 
@@ -27,7 +29,8 @@ class SearchScreen extends StatelessWidget implements PreferredSizeWidget {
                   const Icon(Icons.search),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: const Text("ابحث عن جهاز"),
+                    child: Text('ابحث عن جهاز',
+                        style: CustomersTheme.textStyles.fieldLabel),
                   ),
                 ],
               ),

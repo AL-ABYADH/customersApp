@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/product_item.dart';
 import '../theme/customers_theme.dart';
+import './product_condition.dart';
+import './rating.dart';
 
 class ProductItemCard extends StatelessWidget {
   final ProductItem item;
@@ -13,32 +15,57 @@ class ProductItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String currencyDisplay = '';
+    switch (item.price.currency) {
+      case 'USD':
+        currencyDisplay = '\$';
+        break;
+      case 'YER':
+        currencyDisplay = 'ريال يمني';
+        break;
+      case 'SAR':
+        currencyDisplay = 'ريال سعودي';
+        break;
+    }
+
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            SizedBox(
-              height: 170,
-              width: 130,
-              child: Image.network(
-                item.primImageUrl,
-                width: 150,
-                height: 150,
-                fit: BoxFit.cover,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          SizedBox(
+            height: 170,
+            width: 200,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(CustomersTheme.radius),
+              ),
+              child: SizedBox(
+                height: 200,
+                child: Image.network(
+                  item.primImageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            Text(item.productName, style: CustomersTheme.textStyles.titleLarge),
-            Text('\$${item.price.price} ${item.price.currency}',
-                style: CustomersTheme.textStyles.display),
-            // _buildRatingStars(rating),
-            item.usedProduct
-                ? Text('Used (${item.usedProductCondition})',
-                    style: CustomersTheme.textStyles.display)
-                : Text('New', style: CustomersTheme.textStyles.display),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(item.productName,
+                style: CustomersTheme.textStyles.titleLarge),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text('${item.price.price} $currencyDisplay',
+                style: CustomersTheme.textStyles.titleMedium),
+          ),
+          Row(
+            children: [
+              Rating(rating: item.rating),
+              ProductCondition(
+                  condition: item.usedProductCondition, used: item.usedProduct),
+            ],
+          )
+        ],
       ),
     );
   }

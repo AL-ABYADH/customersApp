@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomersTheme {
   // Border radius
-  static const double radius = 12;
+  static const double radius = 8;
 
   // Colors
   static final CustomersColors colors = CustomersColors();
@@ -38,8 +38,8 @@ class CustomersTheme {
 }
 
 class CustomersColors {
-  Color primaryColor = const Color(0xff599873);
-  Color primaryColorTransparent = const Color.fromRGBO(16, 94, 177, 0.5);
+  Color primaryColor = const Color.fromRGBO(89, 152, 115, 1);
+  Color primaryColorTransparent = const Color.fromRGBO(89, 152, 115, 0.3);
   Color firstSecondaryColor = const Color.fromARGB(255, 81, 143, 234);
   Color secondSecondaryColor = const Color.fromARGB(255, 186, 134, 32);
   Color successColor = const Color.fromARGB(255, 0, 109, 62);
