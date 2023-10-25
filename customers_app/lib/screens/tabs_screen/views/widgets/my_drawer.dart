@@ -70,10 +70,10 @@ class MyDrawer extends StatelessWidget {
                       bottomLeft: Radius.circular(15),
                       bottomRight: Radius.circular(15),
                     ),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('E:/customersApp/customers_app/lib/assets/images/background.png'), // Replace with the actual image path
-                    ),
+                    // image: DecorationImage(
+                    //   fit: BoxFit.cover,
+                    //   image: AssetImage('E:/customersApp/customers_app/lib/assets/images/background.png'), // Replace with the actual image path
+                    // ),
                   ),
                 ),
                 Container(

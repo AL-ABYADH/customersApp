@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../../../screens/search_screen/views/search_screen.dart';
 import '../../../../../theme/customers_theme.dart';
 import './widgets/product_items_row.dart';
-import '../../../providers/tabs_provider.dart';
 import '../../../../../models/product_item.dart';
 
 class HomeScreen extends StatelessWidget {
