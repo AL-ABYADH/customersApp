@@ -4,7 +4,7 @@ import 'package:customers_app/screens/auth_screen/screens/login_screen/providers
 import 'package:customers_app/screens/auth_screen/screens/login_screen/views/login_screen.dart';
 import 'package:customers_app/screens/auth_screen/screens/sign_up_screen/views/sign_up_screen.dart';
 import 'package:customers_app/screens/tabs_screen/screens/home_screen/views/home_screen.dart';
-import 'package:customers_app/screens/tabs_screen/screens/home_screen/provider/home_provider.dart';
+import 'package:customers_app/screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
