@@ -6,6 +6,7 @@ import '../../../../../screens/search_screen/views/search_screen.dart';
 import '../../../../../theme/customers_theme.dart';
 import './widgets/product_items_row.dart';
 import '../../../providers/tabs_provider.dart';
+import '../../../../../models/product_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -30,6 +31,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context);
+
+    final Map<String, List<ProductItem>> productItemsRows = {
+      'الأحدث في المتجر': homeProvider.recentlyAddedItems,
+      'الأعلى تقييماً': homeProvider.highRatedItems,
+    };
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -49,10 +57,14 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        const Icon(Icons.search),
+                        const Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: const Text("ابحث عن جهاز"),
+                          child: Text('ابحث عن جهاز',
+                              style: CustomersTheme.textStyles.fieldLabel),
                         ),
                       ],
                     ),
@@ -78,15 +90,29 @@ class HomeScreen extends StatelessWidget {
                 ))
               ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            Consumer<HomeProvider>(
-              builder: (context, homeConsumer, _) => ProductItemsRow(
-                label: 'الأحدث في المتجر',
-                productItems: homeConsumer.recentlyAddedItems,
-              ),
-            ),
+            Expanded(
+                child: ListView(
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                ProductItemsRow(
+                  label:
+                      productItemsRows.keys.toList()[0], // 'الأحدث في المتجر'
+                  productItems: productItemsRows.values.toList()[0],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ProductItemsRow(
+                  label: productItemsRows.keys.toList()[1], // 'الأعلى تقييماً'
+                  productItems: productItemsRows.values.toList()[1],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ))
           ],
         ),
       ),
