@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-class ProductItemScreen extends StatelessWidget {
-  const ProductItemScreen({super.key});
+
+class ProductItemDetailsScreen extends StatelessWidget {
+  static const routeName = 'product-item-details-screen';
+
+  const ProductItemDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent
-          ,
+          backgroundColor: Colors.transparent,
           elevation: 0,
-          titleTextStyle: const TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.w500),
+          titleTextStyle: const TextStyle(
+              color: Colors.black, fontSize: 25, fontWeight: FontWeight.w500),
           title: const Text("details product"),
         ),
-
-        
         body: const Center(child: Text('Products details')),
-
       ),
     );
   }
@@ -24,8 +24,8 @@ class ProductItemScreen extends StatelessWidget {
 
 // import 'dart:ui';
 // import 'package:flutter/material.dart';
-// class ProductItemScreen extends StatelessWidget {
-//   const ProductItemScreen({Key? key}) : super(key: key);
+// class ProductItemDetailsScreen extends StatelessWidget {
+//   const ProductItemDetailsScreen({Key? key}) : super(key: key);
 
 //   @override
 //   Widget build(BuildContext context) {
