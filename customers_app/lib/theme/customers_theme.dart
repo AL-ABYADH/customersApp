@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomersTheme {
   // Border radius
-  static const double radius = 12;
+  static const double radius = 8;
 
   // Colors
   static final CustomersColors colors = CustomersColors();

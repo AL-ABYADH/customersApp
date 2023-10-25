@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/product_item.dart';
 import '../theme/customers_theme.dart';
 import './product_condition.dart';
+import './rating.dart';
 
 class ProductItemCard extends StatelessWidget {
   final ProductItem item;
@@ -33,12 +34,18 @@ class ProductItemCard extends StatelessWidget {
         children: [
           SizedBox(
             height: 170,
-            width: 150,
-            child: Image.network(
-              item.primImageUrl,
-              width: 150,
-              height: 150,
-              fit: BoxFit.cover,
+            width: 200,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(CustomersTheme.radius),
+              ),
+              child: SizedBox(
+                height: 200,
+                child: Image.network(
+                  item.primImageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
           Padding(
@@ -51,9 +58,13 @@ class ProductItemCard extends StatelessWidget {
             child: Text('${item.price.price} $currencyDisplay',
                 style: CustomersTheme.textStyles.titleMedium),
           ),
-          // _buildRatingStars(rating),
-          ProductCondition(
-              condition: item.usedProductCondition, used: item.usedProduct)
+          Row(
+            children: [
+              Rating(rating: item.rating),
+              ProductCondition(
+                  condition: item.usedProductCondition, used: item.usedProduct),
+            ],
+          )
         ],
       ),
     );
