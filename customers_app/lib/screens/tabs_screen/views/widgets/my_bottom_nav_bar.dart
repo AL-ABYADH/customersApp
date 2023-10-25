@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../theme/Customers_theme.dart';
+import '../../../../theme/customers_theme.dart';
 import '../../providers/tabs_provider.dart';
 import './my_nav_bar_item.dart';
 
