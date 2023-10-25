@@ -38,10 +38,10 @@ class CustomersTheme {
 }
 
 class CustomersColors {
-  Color primaryColor = const Color.fromRGBO(89, 152, 115, 1);
+  Color primaryColor = const Color.fromARGB(255, 69, 131, 95);
   Color primaryColorTransparent = const Color.fromRGBO(89, 152, 115, 0.3);
   Color firstSecondaryColor = const Color.fromARGB(255, 81, 143, 234);
-  Color secondSecondaryColor = const Color.fromARGB(255, 186, 134, 32);
+  Color secondSecondaryColor = const Color.fromARGB(255, 180, 180, 180);
   Color successColor = const Color.fromARGB(255, 0, 109, 62);
   Color errorColor = const Color.fromARGB(255, 155, 55, 77);
   Color backgroundColor = const Color.fromARGB(255, 248, 250, 255);
@@ -80,6 +80,12 @@ class CustomersTextStyles {
     fontWeight: FontWeight.w400,
     color: Color(0xff599873),
   );
+  TextStyle listDividerLabel = TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 10,
+    color: CustomersTheme.colors.primaryColor,
+    decoration: TextDecoration.none,
+);
   TextStyle titleMedium = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 13,

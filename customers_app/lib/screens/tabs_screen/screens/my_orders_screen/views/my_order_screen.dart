@@ -31,12 +31,12 @@ class MyOrdersScreen extends StatelessWidget {
           return ListView(
             children: [
               // Lasting Orders Section
-              SectionTitle(title: 'الطلبات قيد الإجراء'),
+              const SectionTitle(label: 'الطلبات قيد الإجراء'),
               if (awaitingOrders.isNotEmpty ||
                   testingOrders.isNotEmpty ||
                   confirmingOrders.isNotEmpty ||
                   confirmedOrders.isNotEmpty)
-                OrdersList(orders: awaitingOrders),
+              OrdersList(orders: awaitingOrders),
               OrdersList(orders: confirmedOrders),
               OrdersList(orders: testingOrders),
               OrdersList(orders: confirmingOrders),
@@ -48,7 +48,7 @@ class MyOrdersScreen extends StatelessWidget {
                 const Center(child: Text('لا توجد طلبات قيد الإجراء')),
 
               // Done Orders Section
-              SectionTitle(title: 'الطلبات المكتملة'),
+              const SectionTitle(label: 'الطلبات المكتملة'),
               if (doneOrders.isNotEmpty ||
                   canceledOrders.isNotEmpty ||
                   returningOrders.isNotEmpty)

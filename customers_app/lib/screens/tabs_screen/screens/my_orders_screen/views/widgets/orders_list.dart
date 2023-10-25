@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../providers/my_order_provider.dart';
 import 'package:intl/intl.dart';
+import '../../../../../../theme/customers_theme.dart';
 
 class OrdersList extends StatelessWidget {
   final List<Order> orders;
@@ -15,6 +16,7 @@ class OrdersList extends StatelessWidget {
     final formattedDate = DateFormat('yyyy/M/d').format(dateTime);
     return formattedDate;
   }
+
   String formatTime(String timeString) {
     final dateTime = DateTime.parse(timeString);
     final formattedTime = DateFormat('h:mm a').format(dateTime);
@@ -47,42 +49,41 @@ class OrdersList extends StatelessWidget {
     return Column(
       children: orders.map((order) {
         return GestureDetector(
-          onTap: () {
-            // Handle order click
-          },
-          child: Card(
-            child: ListTile(
-              title: Text(order.sellerName),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            onTap: () {
+              // Handle order click
+            },
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(5), // Add padding here
+                child: ListTile(
+                  title: Text(order.sellerName,
+                  style: CustomersTheme.textStyles.titleLarge),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'الحالة: ${getOrderStatus(order.status)}',
+                      Row(
+                        children: [
+                          Text('الحالة: ${getOrderStatus(order.status)}',
+                              style: CustomersTheme.textStyles.labelSmall.copyWith(color: CustomersTheme.colors.secondSecondaryColor)),
+                          const Expanded(child: SizedBox()),
+                          Text(formatDate(order.date),
+                              style: CustomersTheme.textStyles.labelSmall.copyWith(color: CustomersTheme.colors.secondSecondaryColor)),
+                        ],
                       ),
-                      const Expanded(child: SizedBox()),
-                      Text(
-                        formatDate(order.date),
+                      Row(
+                        children: [
+                          Text('السعر: ${order.price}',
+                              style: CustomersTheme.textStyles.labelSmall.copyWith(color: CustomersTheme.colors.secondSecondaryColor)),
+                          const Expanded(child: SizedBox()),
+                          Text(formatTime(order.date),
+                              style: CustomersTheme.textStyles.labelSmall.copyWith(color: CustomersTheme.colors.secondSecondaryColor)),
+                        ],
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        'السعر: ${order.price}',
-                      ),
-                      const Expanded(child: SizedBox()),
-                      Text(
-                        formatTime(order.date),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        );
+            ));
       }).toList(),
     );
   }
