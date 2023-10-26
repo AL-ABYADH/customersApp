@@ -19,11 +19,7 @@ class BrandsRow extends StatelessWidget {
     final browsProvider = Provider.of<BrowsProvider>(context);
 
     // Set up the chat row items
-    final List<Widget> chatRowItems = [
-      const SizedBox(
-        width: 15,
-      ),
-    ];
+    final List<Widget> chatRowItems = [];
     for (String brand in brands) {
       chatRowItems.addAll(
         [

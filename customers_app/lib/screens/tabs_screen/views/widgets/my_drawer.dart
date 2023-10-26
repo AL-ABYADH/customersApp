@@ -65,20 +65,6 @@ class MyDrawer extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   height: 170,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    ),
-                    // image: DecorationImage(
-                    //   fit: BoxFit.cover,
-                    //   image: AssetImage('E:/customersApp/customers_app/lib/assets/images/background.png'), // Replace with the actual image path
-                    // ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 170,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(15),
@@ -89,7 +75,8 @@ class MyDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const CircleAvatar(
-                    backgroundImage: AssetImage('E:/customersApp/customers_app/lib/assets/images/background.png'), // Replace with the actual image path
+                    backgroundImage: AssetImage(
+                        'lib/assets/images/profile_placeholder.png'), // Replace with the actual image path
                   ),
                   title: Text(
                     'username', // Replace with the actual username

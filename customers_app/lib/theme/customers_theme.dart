@@ -55,8 +55,8 @@ class CustomersColors {
 class CustomersGradients {
   LinearGradient horizontalGradient = const LinearGradient(
     colors: [
-      Color.fromRGBO(26, 112, 176, 0.2),
-      Color.fromRGBO(26, 112, 176, 0.8),
+      Color.fromRGBO(89, 152, 115, 0.2),
+      Color.fromRGBO(89, 152, 115, 0.8),
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,

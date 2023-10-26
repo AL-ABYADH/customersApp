@@ -1,11 +1,16 @@
-import 'package:customers_app/screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/home_provider.dart';
 import '../../../../../screens/search_screen/views/search_screen.dart';
 import '../../../../../theme/customers_theme.dart';
 import './widgets/product_items_row.dart';
 import '../../../../../models/product_item.dart';
+import '../../../../../providers/user_provider.dart';
+import '../../../../../widgets/loading_error.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -30,6 +35,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final token = Provider.of<UserProvider>(context, listen: false).token;
+
     final homeProvider = Provider.of<HomeProvider>(context);
 
     final Map<String, List<ProductItem>> productItemsRows = {
@@ -95,18 +102,61 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                ProductItemsRow(
-                  label:
-                      productItemsRows.keys.toList()[0], // 'الأحدث في المتجر'
-                  productItems: productItemsRows.values.toList()[0],
-                ),
+                FutureBuilder(
+                    future: !homeProvider.recentlyAddedItemsFetched
+                        ? homeProvider.fetchRecentlyAddedItems('token')
+                        : null,
+                    builder: (context, snapshot) {
+                      if (snapshot.error != null) {
+                        return snapshot.error is SocketException ||
+                                snapshot.error is TimeoutException
+                            ? LoadingError(
+                                message: 'تحقق من اتصالك بالشبكة ثم قم',
+                                refresh: homeProvider.refetchRecentlyAddedItems,
+                              )
+                            : LoadingError(
+                                message: 'حدث خطأ ما في النظام، قم',
+                                refresh: homeProvider.refetchRecentlyAddedItems,
+                              );
+                      } else {
+                        return ProductItemsRow(
+                          label: productItemsRows.keys
+                              .toList()[0], // 'الأحدث في المتجر'
+                          productItems: productItemsRows.values.toList()[0],
+                          isLoading: snapshot.connectionState ==
+                              ConnectionState.waiting,
+                        );
+                      }
+                    }),
                 const SizedBox(
                   height: 10,
                 ),
-                ProductItemsRow(
-                  label: productItemsRows.keys.toList()[1], // 'الأعلى تقييماً'
-                  productItems: productItemsRows.values.toList()[1],
-                ),
+                FutureBuilder(
+                    future: !homeProvider.highRatedItemsFetched
+                        ? homeProvider.fetchHighRatedItems('token')
+                        : null,
+                    builder: (context, snapshot) {
+                      if (snapshot.error != null) {
+                        return snapshot.error is SocketException ||
+                                snapshot.error is TimeoutException
+                            ? LoadingError(
+                                message: 'تحقق من اتصالك بالشبكة ثم قم',
+                                refresh: homeProvider.refetchHighRatedItems,
+                              )
+                            : LoadingError(
+                                message: 'حدث خطأ ما في النظام، قم',
+                                refresh: homeProvider.refetchHighRatedItems,
+                              );
+                      } else {
+                        return ProductItemsRow(
+                          label: productItemsRows.keys
+                              .toList()[1], // 'الأعلى تقييماً'
+                          productItems: productItemsRows.values.toList()[1],
+                          isLoading: snapshot.connectionState ==
+                              ConnectionState.waiting,
+                        );
+                      }
+                    }),
                 const SizedBox(
                   height: 10,
                 ),

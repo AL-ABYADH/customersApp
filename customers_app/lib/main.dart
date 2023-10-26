@@ -19,6 +19,8 @@ import './screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
 import './screens/search_screen/views/search_screen.dart';
 import './screens/product_item_details_screen/views/product_item_details_screen.dart';
 import './screens/product_item_details_screen/providers/product_item_details_provider.dart';
+import './screens/brand_product_items_screen/views/brand_product_items_screen.dart';
+import './screens/brand_product_items_screen/providers/brand_product_items_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +77,11 @@ class MyApp extends StatelessWidget {
                 ChangeNotifierProvider.value(
                   value: ProductItemDetailsProvider(),
                   child: const ProductItemDetailsScreen(),
+                ),
+            BrandProductItemsScreen.routeName: (ctx) =>
+                ChangeNotifierProvider.value(
+                  value: BrandProductItemsProvider(),
+                  child: const BrandProductItemsScreen(),
                 ),
           },
         );

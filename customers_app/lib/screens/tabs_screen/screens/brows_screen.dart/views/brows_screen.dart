@@ -8,12 +8,17 @@ import '../providers/brows_provider.dart';
 import '../../../../../theme/customers_theme.dart';
 import '../../../../../widgets/loading_error.dart';
 import './widgets/brands_row.dart';
+import '../../../../../widgets/products_grid.dart';
+import '../../../../../providers/user_provider.dart';
+import '../../../../../screens/brand_product_items_screen/views/brand_product_items_screen.dart';
 
 class BrowsScreen extends StatelessWidget {
   const BrowsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final token = Provider.of<UserProvider>(context, listen: false).token;
+
     final browsProvider = Provider.of<BrowsProvider>(context, listen: false);
 
     return Directionality(
@@ -23,7 +28,7 @@ class BrowsScreen extends StatelessWidget {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.all(10),
               child: BrandsRow(
                 brands: browsProvider.brands.keys.toList(),
                 selectedBrandIndex: browsProvider.selectedBrandIndex,
@@ -35,7 +40,7 @@ class BrowsScreen extends StatelessWidget {
                   Consumer<BrowsProvider>(builder: (context, browsConsumer, _) {
                 return FutureBuilder(
                   future: !browsConsumer.productsFetched
-                      ? browsConsumer.fetchProducts()
+                      ? browsConsumer.fetchProducts('token')
                       : null,
                   builder: (context, messagesSnapshot) {
                     if (messagesSnapshot.connectionState ==
@@ -57,7 +62,9 @@ class BrowsScreen extends StatelessWidget {
                               refresh: browsConsumer.refetchProducts,
                             );
                     } else {
-                      return const Text('products');
+                      return ProductsGrid(
+                        products: browsConsumer.products,
+                      );
                     }
                   },
                 );
