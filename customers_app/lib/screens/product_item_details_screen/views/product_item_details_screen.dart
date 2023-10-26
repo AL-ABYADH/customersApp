@@ -1,4 +1,11 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../../theme/customers_theme.dart';
+import '../../../widgets/rating.dart';
+import '../../../widgets/product_condition.dart';
 
 class ProductItemDetailsScreen extends StatelessWidget {
   static const routeName = 'product-item-details-screen';
@@ -7,16 +14,127 @@ class ProductItemDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          titleTextStyle: const TextStyle(
-              color: Colors.black, fontSize: 25, fontWeight: FontWeight.w500),
-          title: const Text("details product"),
-        ),
-        body: const Center(child: Text('Products details')),
+    return Scaffold(
+      appBar: AppBar(
+          title: Text(
+            'Product Name',
+            style: CustomersTheme.textStyles.titleLarge,
+          ),
+          backgroundColor: CustomersTheme.colors.backgroundColor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back,
+                color: CustomersTheme.colors.primaryColor, size: 35),
+            onPressed: () {
+              Navigator.pop(context); // Navigate back to the previous screen
+            },
+          ),
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: CustomersTheme.colors.primaryColor,
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.dark),
+          elevation: 0.0),
+      body: ListView(
+        children: [
+          // Product Image
+          SizedBox(
+            height: 200, // Limit the image height to 200 pixels
+            child: Image.network(
+              'https://example.com/product-image.jpg', // Replace with the image URL
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          // Product Price
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Price: \$250.00', // Replace with the product price and currency
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          // Product Rating
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+               Rating(rating: 4.0), // Replace with the actual product rating
+                SizedBox(width: 5), // Add spacing between Rating and ProductCondition
+                ProductCondition(
+                  condition: 'excellent', // Replace with the actual condition
+                  used: true, // Replace with the actual condition status Replace with the actual product rating
+          ),
+          
+              ],
+            ),
+          ),
+
+          // Flaws and Warranty Level
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Flaws:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('Minor scratches on the surface'),
+                SizedBox(height: 10),
+                Text(
+                  'Warranty Level:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('1 Year Limited Warranty'),
+              ],
+            ),
+          ),
+
+          // Used Condition
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Used:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('Yes'),
+                SizedBox(height: 10),
+                Text(
+                  'Condition:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('Good'),
+              ],
+            ),
+          ),
+
+          // Product Details
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Product Details:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                  'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                  'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
+                  'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

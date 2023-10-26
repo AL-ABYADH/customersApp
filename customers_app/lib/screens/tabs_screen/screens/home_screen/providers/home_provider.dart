@@ -158,7 +158,7 @@ class HomeProvider with ChangeNotifier {
       ],
     ),
   ];
-
+  
   final List<ProductItem> _highRatedItems = [
     ProductItem(
       id: 1,
