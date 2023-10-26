@@ -1,4 +1,11 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../../theme/customers_theme.dart';
+import '../../../widgets/rating.dart';
+import '../../../widgets/product_condition.dart';
 
 class ProductItemDetailsScreen extends StatelessWidget {
   static const routeName = 'product-item-details-screen';
@@ -7,16 +14,203 @@ class ProductItemDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          titleTextStyle: const TextStyle(
-              color: Colors.black, fontSize: 25, fontWeight: FontWeight.w500),
-          title: const Text("details product"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'اسم المنتج',
+          style: CustomersTheme.textStyles.titleLarge,
         ),
-        body: const Center(child: Text('Products details')),
+        backgroundColor: CustomersTheme.colors.backgroundColor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,
+              color: CustomersTheme.colors.primaryColor, size: 35),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous screen
+          },
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: CustomersTheme.colors.primaryColor,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        elevation: 0.0,
+      ),
+      body: ListView(
+        children: [
+          // Product Image
+          SizedBox(
+            height: 200, // Limit the image height to 200 pixels
+            child: Image.network(
+              'https://example.com/product-image.jpg', // Replace with the image URL
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          // Product Price
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 8.0, 0.8),
+            child: Text(
+              '\$250.00', // Replace with the product price and currency
+              style: CustomersTheme.textStyles.titleLarge,
+            ),
+          ),
+
+          // Product Rating and Condition (in a Row)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Rating(rating: 4.0), // Replace with the actual product rating
+                SizedBox(
+                    width:
+                        5), // Add spacing between Rating and ProductCondition
+                ProductCondition(
+                  condition: 'excellent', // Replace with the actual condition
+                  used:
+                      true, // Replace with the actual condition status Replace with the actual product rating
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'اسم البائع:',
+                  style: CustomersTheme.textStyles.titleMedium,
+                ),
+                Text('علي حيدر',
+                  style: CustomersTheme.textStyles.display,
+                ), // Replace with the actual warranty period
+              ],
+            ),
+          ),
+
+          // Flaws and Severity Level
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Table(
+              columnWidths: {
+                0: FlexColumnWidth(2), // Adjust the flex value as needed
+                1: FlexColumnWidth(3), // Adjust the flex value as needed
+              },
+              children: [
+                TableRow(
+                  children: [
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'العيوب:',
+                          style: CustomersTheme.textStyles.titleMedium,
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'مستوى الخطورة:',
+                          style: CustomersTheme.textStyles.titleMedium,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'خدوش بسيطة على السطح',
+                          style: CustomersTheme.textStyles.display,
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'منخفض',
+                          style: CustomersTheme.textStyles.display,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Used Condition
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'مستخدم:',
+                  style: CustomersTheme.textStyles.titleMedium,
+                ),
+                Text(
+                  'نعم',
+                  style: CustomersTheme.textStyles.display,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'الحالة:',
+                  style: CustomersTheme.textStyles.titleMedium,
+                ),
+                Text('جيدة',
+                  style: CustomersTheme.textStyles.display,
+                ),
+              ],
+            ),
+          ),
+
+          // Warranty Period
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'الضمان:',
+                  style: CustomersTheme.textStyles.titleMedium,
+                ),
+                Text('سنة',
+                  style: CustomersTheme.textStyles.display,
+                ), // Replace with the actual warranty period
+              ],
+            ),
+          ),
+
+          // Product features
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'مميزات المنتج:',
+                  style: CustomersTheme.textStyles.titleMedium,
+                ),
+                Text(
+                  'نص تجريبي لتفاصيل المنتج. '
+                  'يمكنك تخصيص هذا النص وإضافة مزيد من التفاصيل هنا. '
+                  'نص تجريبي لتفاصيل المنتج. '
+                  'يمكنك تخصيص هذا النص وإضافة مزيد من التفاصيل هنا.',
+                  style: CustomersTheme.textStyles.display,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

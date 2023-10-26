@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/my_orders_screen/providers/my_order_provider.dart';
-import '../screens/my_orders_screen/views/my_order_screen.dart';
+import '../screens/orders_screen/providers/order_provider.dart';
+import '../screens/orders_screen/views/order_screen.dart';
 import '../screens/home_screen/views/home_screen.dart';
 import '../screens/home_screen/providers/home_provider.dart';
 import '../screens/brows_screen.dart/views/brows_screen.dart';
@@ -19,8 +19,8 @@ class TabsProvider with ChangeNotifier {
       child: const BrowsScreen(),
     ),
     ChangeNotifierProvider.value(
-      value: MyOrdersProvider(),
-      child: const MyOrdersScreen(),
+      value: OrdersProvider(),
+      child: const OrdersScreen(),
     ),
   ];
 
