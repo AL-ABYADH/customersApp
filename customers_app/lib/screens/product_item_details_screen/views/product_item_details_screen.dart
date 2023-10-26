@@ -16,23 +16,25 @@ class ProductItemDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-            'Product Name',
-            style: CustomersTheme.textStyles.titleLarge,
-          ),
-          backgroundColor: CustomersTheme.colors.backgroundColor,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back,
-                color: CustomersTheme.colors.primaryColor, size: 35),
-            onPressed: () {
-              Navigator.pop(context); // Navigate back to the previous screen
-            },
-          ),
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: CustomersTheme.colors.primaryColor,
-              statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark),
-          elevation: 0.0),
+        title: Text(
+          'اسم المنتج',
+          style: CustomersTheme.textStyles.titleLarge,
+        ),
+        backgroundColor: CustomersTheme.colors.backgroundColor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,
+              color: CustomersTheme.colors.primaryColor, size: 35),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous screen
+          },
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: CustomersTheme.colors.primaryColor,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        elevation: 0.0,
+      ),
       body: ListView(
         children: [
           // Product Image
@@ -47,49 +49,100 @@ class ProductItemDetailsScreen extends StatelessWidget {
 
           // Product Price
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 8.0, 0.8),
             child: Text(
-              'Price: \$250.00', // Replace with the product price and currency
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              '\$250.00', // Replace with the product price and currency
+              style: CustomersTheme.textStyles.titleLarge,
             ),
           ),
 
-          // Product Rating
+          // Product Rating and Condition (in a Row)
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-               Rating(rating: 4.0), // Replace with the actual product rating
-                SizedBox(width: 5), // Add spacing between Rating and ProductCondition
+                Rating(rating: 4.0), // Replace with the actual product rating
+                SizedBox(
+                    width:
+                        5), // Add spacing between Rating and ProductCondition
                 ProductCondition(
                   condition: 'excellent', // Replace with the actual condition
-                  used: true, // Replace with the actual condition status Replace with the actual product rating
-          ),
-          
+                  used:
+                      true, // Replace with the actual condition status Replace with the actual product rating
+                ),
               ],
             ),
           ),
 
-          // Flaws and Warranty Level
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Flaws:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'اسم البائع:',
+                  style: CustomersTheme.textStyles.titleMedium,
                 ),
-                Text('Minor scratches on the surface'),
-                SizedBox(height: 10),
-                Text(
-                  'Warranty Level:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Text('علي حيدر',
+                  style: CustomersTheme.textStyles.display,
+                ), // Replace with the actual warranty period
+              ],
+            ),
+          ),
+
+          // Flaws and Severity Level
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Table(
+              columnWidths: {
+                0: FlexColumnWidth(2), // Adjust the flex value as needed
+                1: FlexColumnWidth(3), // Adjust the flex value as needed
+              },
+              children: [
+                TableRow(
+                  children: [
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'العيوب:',
+                          style: CustomersTheme.textStyles.titleMedium,
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'مستوى الخطورة:',
+                          style: CustomersTheme.textStyles.titleMedium,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Text('1 Year Limited Warranty'),
+                TableRow(
+                  children: [
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'خدوش بسيطة على السطح',
+                          style: CustomersTheme.textStyles.display,
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                          'منخفض',
+                          style: CustomersTheme.textStyles.display,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -101,35 +154,58 @@ class ProductItemDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Used:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'مستخدم:',
+                  style: CustomersTheme.textStyles.titleMedium,
                 ),
-                Text('Yes'),
+                Text(
+                  'نعم',
+                  style: CustomersTheme.textStyles.display,
+                ),
                 SizedBox(height: 10),
                 Text(
-                  'Condition:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'الحالة:',
+                  style: CustomersTheme.textStyles.titleMedium,
                 ),
-                Text('Good'),
+                Text('جيدة',
+                  style: CustomersTheme.textStyles.display,
+                ),
               ],
             ),
           ),
 
-          // Product Details
+          // Warranty Period
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Product Details:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'الضمان:',
+                  style: CustomersTheme.textStyles.titleMedium,
+                ),
+                Text('سنة',
+                  style: CustomersTheme.textStyles.display,
+                ), // Replace with the actual warranty period
+              ],
+            ),
+          ),
+
+          // Product features
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'مميزات المنتج:',
+                  style: CustomersTheme.textStyles.titleMedium,
                 ),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                  'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-                  'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-                  'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                  'نص تجريبي لتفاصيل المنتج. '
+                  'يمكنك تخصيص هذا النص وإضافة مزيد من التفاصيل هنا. '
+                  'نص تجريبي لتفاصيل المنتج. '
+                  'يمكنك تخصيص هذا النص وإضافة مزيد من التفاصيل هنا.',
+                  style: CustomersTheme.textStyles.display,
                 ),
               ],
             ),
