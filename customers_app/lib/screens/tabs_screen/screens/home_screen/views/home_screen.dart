@@ -6,6 +6,7 @@ import '../../../../../screens/search_screen/views/search_screen.dart';
 import '../../../../../theme/customers_theme.dart';
 import './widgets/product_items_row.dart';
 import '../../../../../models/product_item.dart';
+import '../../../../../widgets/bottom_sheet.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -73,20 +74,24 @@ class HomeScreen extends StatelessWidget {
                   },
                 )),
                 GestureDetector(
-                    child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white,
+                    ),
+                    width: 45,
+                    height: 44,
+                    margin: const EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.all(5),
+                    child: Image.asset(
+                      "lib/assets/icons/filter.png",
+                      color: CustomersTheme.colors.primaryColor,
+                    ),
                   ),
-                  width: 45,
-                  height: 44,
-                  margin: const EdgeInsets.only(left: 10),
-                  padding: const EdgeInsets.all(5),
-                  child: Image.asset(
-                    "lib/assets/icons/filter.png",
-                    color: CustomersTheme.colors.primaryColor,
-                  ),
-                ))
+                  onTap: () {
+                    CustomBottomSheet.showCustomBottomSheet(context);
+                  },
+                )
               ],
             ),
             Expanded(
