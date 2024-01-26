@@ -38,7 +38,7 @@ class CustomersTheme {
 }
 
 class CustomersColors {
-  Color primaryColor = const Color.fromARGB(255, 69, 131, 95);
+  Color primaryColor = const Color.fromRGBO(69, 131, 95, 1);
   Color primaryColorTransparent = const Color.fromRGBO(89, 152, 115, 0.3);
   Color firstSecondaryColor = const Color.fromARGB(255, 81, 143, 234);
   Color secondSecondaryColor = const Color.fromARGB(255, 180, 180, 180);
@@ -64,8 +64,8 @@ class CustomersGradients {
   );
   LinearGradient verticalGradient = const LinearGradient(
     colors: [
-      Color.fromRGBO(26, 112, 176, 0.2),
-      Color.fromRGBO(26, 112, 176, 0.8),
+      Color.fromRGBO(89, 152, 115, 0.2),
+      Color.fromRGBO(89, 152, 115, 0.8),
     ],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -85,7 +85,7 @@ class CustomersTextStyles {
     fontSize: 10,
     color: CustomersTheme.colors.primaryColor,
     decoration: TextDecoration.none,
-);
+  );
   TextStyle titleMedium = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 13,

@@ -219,7 +219,7 @@ class HomeProvider with ChangeNotifier {
       _recentlyAddedItems = loadedProductItems;
       notifyListeners();
     } catch (err) {
-      print(err);
+      // print(err);
       recentlyAddedItemsFetched = true;
       notifyListeners();
       rethrow;
@@ -276,7 +276,7 @@ class HomeProvider with ChangeNotifier {
       _highRatedItems = loadedProductItems;
       notifyListeners();
     } catch (err) {
-      print(err);
+      // print(err);
       highRatedItemsFetched = true;
       notifyListeners();
       rethrow;

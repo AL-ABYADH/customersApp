@@ -17,7 +17,7 @@ class Rating extends StatelessWidget {
         color: CustomersTheme.colors.primaryColorTransparent,
         borderRadius: const BorderRadius.all(Radius.circular(7)),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       child: Row(
         children: [
           const Icon(
