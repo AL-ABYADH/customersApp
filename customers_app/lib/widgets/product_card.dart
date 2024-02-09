@@ -17,8 +17,14 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context)
-          .pushNamed(BrandProductItemsScreen.routeName, arguments: product.id),
+          .pushNamed(BrandProductItemsScreen.routeName, arguments: {
+        'productId': product.id,
+        'productName': product.name,
+      }),
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(CustomersTheme.radius),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [

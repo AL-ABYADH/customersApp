@@ -24,6 +24,11 @@ class LoadingError extends StatelessWidget {
           ),
           TextButton(
             onPressed: refresh,
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(
+                CustomersTheme.colors.primaryColor.withOpacity(0.1),
+              ),
+            ),
             child: Text(
               'بتحديث الصفحة',
               style: CustomersTheme.textStyles.display.copyWith(

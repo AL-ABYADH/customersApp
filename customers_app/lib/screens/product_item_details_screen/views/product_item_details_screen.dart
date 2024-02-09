@@ -41,7 +41,7 @@ class ProductItemDetailsScreen extends StatelessWidget {
           SizedBox(
             height: 200, // Limit the image height to 200 pixels
             child: Image.network(
-              'https://example.com/product-image.jpg', // Replace with the image URL
+              'https://example.com/product-image.jpg',
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -83,7 +83,8 @@ class ProductItemDetailsScreen extends StatelessWidget {
                   'اسم البائع:',
                   style: CustomersTheme.textStyles.titleMedium,
                 ),
-                Text('علي حيدر',
+                Text(
+                  'علي حيدر',
                   style: CustomersTheme.textStyles.display,
                 ), // Replace with the actual warranty period
               ],
@@ -166,7 +167,8 @@ class ProductItemDetailsScreen extends StatelessWidget {
                   'الحالة:',
                   style: CustomersTheme.textStyles.titleMedium,
                 ),
-                Text('جيدة',
+                Text(
+                  'جيدة',
                   style: CustomersTheme.textStyles.display,
                 ),
               ],
@@ -183,7 +185,8 @@ class ProductItemDetailsScreen extends StatelessWidget {
                   'الضمان:',
                   style: CustomersTheme.textStyles.titleMedium,
                 ),
-                Text('سنة',
+                Text(
+                  'سنة',
                   style: CustomersTheme.textStyles.display,
                 ), // Replace with the actual warranty period
               ],

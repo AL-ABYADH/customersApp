@@ -68,6 +68,7 @@ flutter:
   assets:
     - lib/assets/icons/
     - lib/assets/images/
+    - lib/assets/images/brands/
 
     # environment variables
     - lib/.env

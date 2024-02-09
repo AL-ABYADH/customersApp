@@ -51,6 +51,14 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: CustomersTheme.colors.primaryColor,
+            colorScheme: ColorScheme.fromSwatch(
+              brightness: Brightness.light,
+            ).copyWith(
+              secondary: CustomersTheme.colors.primaryColor,
+            ),
+          ),
           locale: const Locale('ar', 'YE'),
           supportedLocales: const [
             Locale('ar', 'YE'),

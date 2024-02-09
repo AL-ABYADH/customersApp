@@ -22,74 +22,62 @@ class BrandProductItemsProvider with ChangeNotifier {
   }
 
   Future<void> fetchBrandProductItems(String token, int productId) async {
-    final url =
-        Uri.parse('${dotenv.env['URL']}/api/brandProductItems/$productId');
+    final url = Uri.parse(
+        '${dotenv.env['URL']}/api/product-items/all-product-items/$productId');
+    print(url);
     try {
       final responseData =
           await sendGet(url: url, client: _client, token: token);
 
-      final List<ProductItem> loadedProductItems = [];
-
-      for (final productItem in responseData) {
-        loadedProductItems.add(
-          ProductItem(
-            id: productItem['id'],
-            desc: productItem['desc'],
-            productId: productItem['productId'],
-            productName: productItem['productName'],
-            price: Price(
-                price: productItem['price'], currency: productItem['currency']),
-            primImageUrl:
-                'https://cdn.dxomark.com/wp-content/uploads/medias/post-65438/galaxynote20.jpg',
-            imageUrls: [
-              'https://cdn.dxomark.com/wp-content/uploads/medias/post-65438/galaxynote20.jpgg',
-              'https://cdn.dxomark.com/wp-content/uploads/medias/post-65438/galaxynote20.jpgg'
-            ],
-            rating: productItem['rating'],
-            warrantyEndsIn: productItem['warrantyEndsIn'],
-            usedProduct: productItem['usedProduct'] == 1 ? true : false,
-            usedProductCondition: productItem['usedProductCondition'],
-            flaws: [
-              Flaw(flaw: 'Minor dents', severityLevel: 'slight'),
-            ],
-            features: [
-              Feature(feature: 'Feature 1', type: 'string', value: 'Value 6'),
-              Feature(
-                  feature: 'Feature 2',
-                  type: 'list<string>',
-                  value: '["Item X", "Item Y"]'),
-            ],
-          ),
-        );
-      }
+      final List<ProductItem> loadedProductItems =
+          getLoadedProductItems(responseData);
       itemsFetched = true;
       _items = loadedProductItems;
       notifyListeners();
     } catch (err) {
-      // print(err);
+      print(err);
       itemsFetched = true;
       notifyListeners();
       rethrow;
     }
   }
 
-  List<Flaw> _assignFlaws(dynamic flaws) {
-    final List<Flaw> assignedFlaws = [];
-    for (final flaw in flaws) {
-      assignedFlaws
-          .add(Flaw(flaw: flaw['flaw'], severityLevel: flaw['severityLevel']));
-    }
-    return assignedFlaws;
-  }
+  List<ProductItem> getLoadedProductItems(fetchedItems) {
+    final List<ProductItem> loadedProductItems = [];
 
-  List<Feature> _assignFeatures(dynamic features) {
-    final List<Feature> assignedFeatures = [];
-    for (final feature in features) {
-      assignedFeatures.add(Feature(
-          feature: feature['feature'],
-          type: feature['type'],
-          value: feature['value']));
+    for (final productItem in fetchedItems) {
+      loadedProductItems.add(
+        ProductItem(
+          id: productItem['id'],
+          desc: productItem['desc'],
+          productId: productItem['productId'],
+          productName: productItem['productName'],
+          price: Price(
+              price: productItem['price'], currency: productItem['currency']),
+          primImageUrl: '${dotenv.env['URL']}${productItem['primImageUrl']}',
+          imageUrls: productItem['imageUrls']
+              .map((url) => '${dotenv.env['URL']}url')
+              .whereType<String>()
+              .toList(),
+          rating: productItem['rating'],
+          warrantyEndsIn: productItem['warrantyEndsIn'],
+          usedProduct: productItem['usedProduct'] == 1 ? true : false,
+          usedProductCondition: productItem['usedProductCondition'],
+          flaws: productItem['flaws']
+              .map((flaw) => Flaw(
+                  flaw: flaw['flaw'], severityLevel: flaw['severityLevel']))
+              .whereType<Flaw>()
+              .toList(),
+          features: [
+            Feature(feature: 'Feature 1', type: 'string', value: 'Value 6'),
+            Feature(
+                feature: 'Feature 2',
+                type: 'list<string>',
+                value: '["Item X", "Item Y"]'),
+          ],
+        ),
+      );
     }
-    return assignedFeatures;
+    return loadedProductItems;
   }
 }

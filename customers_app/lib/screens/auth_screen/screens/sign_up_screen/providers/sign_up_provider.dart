@@ -30,7 +30,7 @@ class SignUpProvider with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final url = Uri.parse('${dotenv.env['URL']}/api/register');
+    final url = Uri.parse('${dotenv.env['URL']}/api/auth/register');
     try {
       final Map<String, String> request = {
         'username': usernameController.text,

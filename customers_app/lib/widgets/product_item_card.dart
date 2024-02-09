@@ -35,12 +35,14 @@ class ProductItemCard extends StatelessWidget {
       child: SizedBox(
         height: 305,
         child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(CustomersTheme.radius),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SizedBox(
                 height: 170,
-                width: 150,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(CustomersTheme.radius),

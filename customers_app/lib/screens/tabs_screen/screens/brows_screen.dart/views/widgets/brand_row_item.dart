@@ -36,7 +36,7 @@ class BrandRowItem extends StatelessWidget {
               backgroundColor: CustomersTheme.colors.backgroundColor,
               child: CircleAvatar(
                 backgroundColor: CustomersTheme.colors.primaryColor,
-                foregroundImage: NetworkImage(
+                foregroundImage: AssetImage(
                   imageUrl,
                 ),
               ),

@@ -59,35 +59,8 @@ class MyDrawer extends StatelessWidget {
       child: Consumer<TabsProvider>(builder: (context, tabsScreenConsumer, _) {
         return Column(
           children: [
-            Stack(
-              alignment: AlignmentDirectional.bottomCenter,
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 170,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    ),
-                    gradient: CustomersTheme.gradients.verticalGradient,
-                  ),
-                ),
-                ListTile(
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage(
-                        'lib/assets/images/profile_placeholder.png'), // Replace with the actual image path
-                  ),
-                  title: Text(
-                    'username', // Replace with the actual username
-                    style: CustomersTheme.textStyles.titleMedium
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(
-              height: 10,
+              height: 30,
             ),
             DrawerItem(
               icon: const Icon(Icons.add),
