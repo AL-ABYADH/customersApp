@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       AuthField(
                         decoration:
-                            CustomersInputDecoration.login(label: 'اسم المستخدم'),
+                            CustomersInputDecoration.primary(label: 'اسم المستخدم'),
                         inputType: TextInputType.text,
                         controller: signUpProvider.usernameController,
                       ),
@@ -59,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       AuthField(
                         decoration:
-                            CustomersInputDecoration.login(label: 'الاسم الكامل'),
+                            CustomersInputDecoration.primary(label: 'الاسم الكامل'),
                         inputType: TextInputType.text,
                         controller: signUpProvider.fullNameController,
                       ),
@@ -68,7 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       AuthField(
                         decoration:
-                            CustomersInputDecoration.login(label: 'رقم الهاتف'),
+                            CustomersInputDecoration.primary(label: 'رقم الهاتف'),
                         inputType: TextInputType.number,
                         controller: signUpProvider.phoneNumberController,
                       ),
@@ -77,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       AuthField(
                         decoration:
-                            CustomersInputDecoration.login(label: 'كلمة المرور'),
+                            CustomersInputDecoration.primary(label: 'كلمة المرور'),
                         inputType: TextInputType.text,
                         controller: signUpProvider.passwordController,
                         obscureText: true,

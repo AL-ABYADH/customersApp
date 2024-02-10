@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import
 
+import 'package:customers_app/screens/cart/views/cart_screen.dart';
+import 'package:customers_app/screens/order_details/views/order_details_screen.dart';
 import 'package:customers_app/screens/tabs_screen/views/tabs_screen.dart';
 import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,10 @@ import './screens/product_item_details_screen/views/product_item_details_screen.
 import './screens/product_item_details_screen/providers/product_item_details_provider.dart';
 import './screens/brand_product_items_screen/views/brand_product_items_screen.dart';
 import './screens/brand_product_items_screen/providers/brand_product_items_provider.dart';
+import './screens/profile_settings/views/profile_settings_screen.dart';
+import './screens/order_details/providers/order_details_provider.dart';
+import './screens/cart/providers/cart_provider.dart';
+import './screens/profile_settings/providers/profile_settings_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +52,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => TabsProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => ProfileSettingsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => OrderDetailsProvider(),
+        ),
       ],
       child: Consumer<UserProvider>(builder: (context, userConsumer, _) {
         return MaterialApp(
@@ -69,7 +84,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           home: userConsumer.isAuth
-              ? Builder(builder: (context) => TabsScreen())
+? Builder(builder: (context) => TabsScreen())
               : FutureBuilder(
                   future: Future.delayed(const Duration(milliseconds: 2000),
                       () => userConsumer.tryAutoLogin()),

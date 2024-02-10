@@ -149,7 +149,7 @@ class CustomersTextStyles {
 
 class CustomersInputDecoration extends InputDecoration {
   // Login credentials fields
-  CustomersInputDecoration.login({required String label})
+  CustomersInputDecoration.primary({required String label})
       : super(
           labelText: label,
           errorStyle: CustomersTheme.textStyles.fieldError,

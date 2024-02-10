@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       AuthField(
                         decoration:
-                            CustomersInputDecoration.login(label: 'اسم المستخدم'),
+                        CustomersInputDecoration.primary(label: 'اسم المستخدم'),
                         inputType: TextInputType.text,
                         controller: loginProvider.usernameController,
                       ),
@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       AuthField(
                         decoration:
-                            CustomersInputDecoration.login(label: 'كلمة المرور'),
+                            CustomersInputDecoration.primary(label: 'كلمة المرور'),
                         inputType: TextInputType.text,
                         controller: loginProvider.passwordController,
                         obscureText: true,
