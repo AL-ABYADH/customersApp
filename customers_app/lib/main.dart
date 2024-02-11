@@ -24,10 +24,10 @@ import './screens/product_item_details_screen/views/product_item_details_screen.
 import './screens/product_item_details_screen/providers/product_item_details_provider.dart';
 import './screens/brand_product_items_screen/views/brand_product_items_screen.dart';
 import './screens/brand_product_items_screen/providers/brand_product_items_provider.dart';
-import './screens/profile_settings/views/profile_settings_screen.dart';
+import 'screens/registration_extra_info/views/registration_extra_info_screen.dart';
 import './screens/order_details/providers/order_details_provider.dart';
 import './screens/cart/providers/cart_provider.dart';
-import './screens/profile_settings/providers/profile_settings_provider.dart';
+import 'screens/registration_extra_info/providers/registration_extra_info_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           create: (ctx) => TabsProvider(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => ProfileSettingsProvider(),
+          create: (ctx) => RegistrationExtraInfoProvider(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => CartProvider(),
@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           home: userConsumer.isAuth
-? Builder(builder: (context) => TabsScreen())
+              ? Builder(builder: (context) => TabsScreen())
               : FutureBuilder(
                   future: Future.delayed(const Duration(milliseconds: 2000),
                       () => userConsumer.tryAutoLogin()),

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../theme/customers_theme.dart';
 import '../../../widgets/my_button.dart';
-class ProfileSettingsPage extends StatelessWidget {
+
+class RegistrationExtraInfoScreen extends StatelessWidget {
+  const RegistrationExtraInfoScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('معلومات المستخدم'),
+        title: const Text('معلومات المستخدم'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -20,9 +24,9 @@ class ProfileSettingsPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               // Image Upload Section
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 300, // Set a fixed height for the image container
                 child: AspectRatio(
@@ -37,36 +41,34 @@ class ProfileSettingsPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Text(
                 'العنوان',
                 style: CustomersTheme.textStyles.titleLarge.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               TextField(
-                decoration: CustomersInputDecoration.primary(
-                  label: "ادخل العنوان"
-                ), 
+                decoration:
+                    CustomersInputDecoration.primary(label: "ادخل العنوان"),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Text(
                 'العملة المستخدمة',
                 style: CustomersTheme.textStyles.titleLarge.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               // Currency Selection Section
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0)
-                  ),
+                      borderRadius: BorderRadius.circular(10.0)),
                   hintText: 'اختر عملة الشراء',
                 ),
-               items: [
+                items: [
                   DropdownMenuItem<String>(
                     value: 'USD',
                     child: Text(
@@ -93,7 +95,7 @@ class ProfileSettingsPage extends StatelessWidget {
                   // Handle currency selection here
                 },
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               // Save Button
               MyButton(
                 onClick: () {
@@ -114,4 +116,3 @@ class ProfileSettingsPage extends StatelessWidget {
     );
   }
 }
-

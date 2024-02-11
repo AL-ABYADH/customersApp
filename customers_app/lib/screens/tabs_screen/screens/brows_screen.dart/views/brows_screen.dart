@@ -41,17 +41,16 @@ class BrowsScreen extends StatelessWidget {
                   future: !browsConsumer.productsFetched
                       ? browsConsumer.fetchBrandProducts(token)
                       : null,
-                  builder: (context, messagesSnapshot) {
-                    if (messagesSnapshot.connectionState ==
-                        ConnectionState.waiting) {
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(
                         child: CircularProgressIndicator(
                           color: CustomersTheme.colors.primaryColor,
                         ),
                       );
-                    } else if (messagesSnapshot.error != null) {
-                      return messagesSnapshot.error is SocketException ||
-                              messagesSnapshot.error is TimeoutException
+                    } else if (snapshot.error != null) {
+                      return snapshot.error is SocketException ||
+                              snapshot.error is TimeoutException
                           ? LoadingError(
                               message: 'تحقق من اتصالك بالشبكة ثم قم',
                               refresh: browsConsumer.refetchProducts,
