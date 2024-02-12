@@ -35,6 +35,10 @@ class UserProvider with ChangeNotifier {
     return _user!.imageUrl;
   }
 
+  String? get preferredCurrency {
+    return _user!.preferredCurrency;
+  }
+
   String? get token {
     if (_user != null) {
       return _user!.token;
@@ -59,6 +63,7 @@ class UserProvider with ChangeNotifier {
     required String name,
     required String phoneNumber,
     required String? imageUrl,
+    required String preferredCurrency,
   }) async {
     _user = User(
       token: token,
@@ -67,6 +72,7 @@ class UserProvider with ChangeNotifier {
       name: name,
       phoneNumber: phoneNumber,
       imageUrl: imageUrl,
+      preferredCurrency: preferredCurrency,
     );
     notifyListeners();
 
@@ -78,6 +84,7 @@ class UserProvider with ChangeNotifier {
       'username': _user!.username,
       'phoneNumber': _user!.phoneNumber,
       'imageUrl': _user!.imageUrl,
+      'preferredCurrency': _user!.preferredCurrency,
     });
     prefs.setString('userData', userData);
   }
@@ -96,6 +103,7 @@ class UserProvider with ChangeNotifier {
     final phoneNumber = extractedUserData['phoneNumber'] as String;
     final username = extractedUserData['username'] as String;
     final imageUrl = extractedUserData['imageUrl'] as String?;
+    final preferredCurrency = extractedUserData['preferredCurrency'] as String;
 
     _user = User(
       token: token,
@@ -104,6 +112,7 @@ class UserProvider with ChangeNotifier {
       name: name,
       phoneNumber: phoneNumber,
       imageUrl: imageUrl,
+      preferredCurrency: preferredCurrency,
     );
 
     // FirebaseAPI().initPushAndLocalNotifications();

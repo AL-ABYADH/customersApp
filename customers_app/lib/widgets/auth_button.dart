@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../theme/customers_theme.dart';
 
-class MyButton extends StatelessWidget {
+class AuthButton extends StatelessWidget {
   final Widget child;
   final void Function()? onClick;
 
-  const MyButton({
+  const AuthButton({
     required this.child,
     required this.onClick,
     super.key,

@@ -6,11 +6,11 @@ import '../theme/customers_theme.dart';
 
 class ProductsItemsGrid extends StatelessWidget {
   final List<ProductItem> items;
-  final void Function() onItemClick;
+  final String category;
 
   const ProductsItemsGrid({
     required this.items,
-    required this.onItemClick,
+    required this.category,
     super.key,
   });
 
@@ -28,7 +28,7 @@ class ProductsItemsGrid extends StatelessWidget {
             ),
             itemBuilder: (ctx, i) => ProductItemCard(
               item: items[i],
-              onClick: onItemClick,
+              category: category,
             ),
           )
         : Center(

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../theme/customers_theme.dart';
 import '../../../providers/auth_provider.dart';
-import '../../../../../widgets/my_button.dart';
+import '../../../../../widgets/auth_button.dart';
 import '../../../views/widgets/auth_field.dart';
 import '../providers/login_provider.dart';
 
@@ -41,8 +41,8 @@ class LoginScreen extends StatelessWidget {
                         height: 50,
                       ),
                       AuthField(
-                        decoration:
-                        CustomersInputDecoration.primary(label: 'اسم المستخدم'),
+                        decoration: CustomersInputDecoration.primary(
+                            label: 'اسم المستخدم'),
                         inputType: TextInputType.text,
                         controller: loginProvider.usernameController,
                       ),
@@ -50,18 +50,21 @@ class LoginScreen extends StatelessWidget {
                         height: 15,
                       ),
                       AuthField(
-                        decoration:
-                            CustomersInputDecoration.primary(label: 'كلمة المرور'),
+                        decoration: CustomersInputDecoration.primary(
+                            label: 'كلمة المرور'),
                         inputType: TextInputType.text,
                         controller: loginProvider.passwordController,
                         obscureText: true,
+                        onSubmitted: loginProvider.isLoading
+                            ? null
+                            : (_) => loginProvider.login(context: context),
                       ),
                       const SizedBox(
                         height: 25,
                       ),
                       Consumer<LoginProvider>(
                         builder: (context, loginConsumer, _) {
-                          return MyButton(
+                          return AuthButton(
                             onClick: loginConsumer.isLoading
                                 ? null
                                 : () => loginProvider.login(context: context),
@@ -93,7 +96,8 @@ class LoginScreen extends StatelessWidget {
                         children: [
                           Text(
                             'لا تمتلك حساب؟',
-                            style: CustomersTheme.textStyles.titleMedium.copyWith(
+                            style:
+                                CustomersTheme.textStyles.titleMedium.copyWith(
                               color: CustomersTheme.colors.displayTextColor,
                             ),
                             textAlign: TextAlign.right,

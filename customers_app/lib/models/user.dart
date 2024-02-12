@@ -5,6 +5,7 @@ class User {
   final String phoneNumber;
   final String token;
   String? imageUrl;
+  String preferredCurrency;
 
   User({
     required this.userId,
@@ -13,5 +14,6 @@ class User {
     required this.token,
     required this.phoneNumber,
     required this.imageUrl,
+    required this.preferredCurrency,
   });
 }

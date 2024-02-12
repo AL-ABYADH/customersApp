@@ -69,6 +69,7 @@ class SignUpProvider with ChangeNotifier {
           responseData['image'] != null && responseData['image'].isNotEmpty
               ? '${dotenv.env['URL']}${responseData["image"]}'
               : null;
+      final preferredCurrency = responseData['preferred_currency'];
 
       if (!context.mounted) return;
       Provider.of<UserProvider>(context, listen: false).createUser(
@@ -78,6 +79,7 @@ class SignUpProvider with ChangeNotifier {
         name: name,
         phoneNumber: phoneNumber,
         imageUrl: imageUrl,
+        preferredCurrency: preferredCurrency,
       );
 
       await FirebaseAPI().initNotifications(userId!);
@@ -85,7 +87,7 @@ class SignUpProvider with ChangeNotifier {
       isLoading = false;
       notifyListeners();
     } catch (err) {
-      print(err);
+      // print(err);
       isLoading = false;
       notifyListeners();
 

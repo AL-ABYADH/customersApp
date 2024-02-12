@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../../models/price.dart';
 import '../../../../../models/product_item.dart';
 import '../../../../../models/feature.dart';
 import '../../../../../models/flaw.dart';
-import '../../../../../models/price.dart';
 import '../../../../../utils/send_get.dart';
 
 class HomeProvider with ChangeNotifier {
@@ -62,7 +62,7 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  var recentlyAddedItemsPage = 1;
+  var recentlyAddedItemsPage = 2;
   var isRecentlyAddedItemsPageEnd = false;
   var isLoadingRecentlyAddedItems = false;
   var isErrorLoadingRecentlyAddedItems = false;
@@ -109,7 +109,7 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  var highRatedItemsPage = 1;
+  var highRatedItemsPage = 2;
   var isHighRatedItemsPageEnd = false;
   var isLoadingHighRatedItems = false;
   var isErrorLoadingHighRatedItems = false;
@@ -156,7 +156,7 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  var newItemsPage = 1;
+  var newItemsPage = 2;
   var isNewItemsPageEnd = false;
   var isLoadingNewItems = false;
   var isErrorLoadingNewItems = false;
@@ -203,7 +203,7 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  var excellentItemsPage = 1;
+  var excellentItemsPage = 2;
   var isExcellentItemsPageEnd = false;
   var isLoadingExcellentItems = false;
   var isErrorLoadingExcellentItems = false;
@@ -254,11 +254,18 @@ class HomeProvider with ChangeNotifier {
           desc: productItem['desc'],
           productId: productItem['productId'],
           productName: productItem['productName'],
+          seller: productItem['seller'],
+          model: productItem['model'],
           price: Price(
-              price: productItem['price'], currency: productItem['currency']),
+            price: productItem['price'],
+            floor: productItem['price'].floor(),
+            fraction: int.parse(productItem['price']
+                .toString()
+                .substring(productItem['price'].toString().length - 2)),
+          ),
           primImageUrl: '${dotenv.env['URL']}${productItem['primImageUrl']}',
           imageUrls: productItem['imageUrls']
-              .map((url) => '${dotenv.env['URL']}url')
+              .map((url) => '${dotenv.env['URL']}$url')
               .whereType<String>()
               .toList(),
           rating: productItem['rating'],

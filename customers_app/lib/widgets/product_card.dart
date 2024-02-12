@@ -32,8 +32,9 @@ class ProductCard extends StatelessWidget {
               height: 150,
               width: 180,
               child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(CustomersTheme.radius),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(CustomersTheme.radius),
+                  topRight: Radius.circular(CustomersTheme.radius),
                 ),
                 child: SizedBox(
                   height: 200,

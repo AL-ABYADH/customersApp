@@ -9,7 +9,6 @@ import '../providers/brand_product_items_provider.dart';
 import '../../../widgets/loading_error.dart';
 import '../../../providers/user_provider.dart';
 import '../../../widgets/product_items_grid.dart';
-import '../../../screens/product_item_details_screen/views/product_item_details_screen.dart';
 
 class BrandProductItemsScreen extends StatelessWidget {
   static const routeName = 'brand-product-item-screen';
@@ -59,8 +58,7 @@ class BrandProductItemsScreen extends StatelessWidget {
               } else {
                 return ProductsItemsGrid(
                   items: brandProductItemConsumer.items,
-                  onItemClick: () => Navigator.of(context)
-                      .pushNamed(ProductItemDetailsScreen.routeName),
+                  category: '',
                 );
               }
             },

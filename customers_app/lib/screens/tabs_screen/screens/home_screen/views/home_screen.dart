@@ -115,8 +115,9 @@ class HomeScreen extends StatelessWidget {
                   ProductItemsRow(
                     isErrorLoading:
                         homeProvider.isErrorLoadingRecentlyAddedItems,
-                    fetchItems: () =>
-                        homeProvider.fetchRecentlyAddedItems(token),
+                    fetchItems: homeProvider.isRecentlyAddedItemsPageEnd
+                        ? null
+                        : () => homeProvider.fetchRecentlyAddedItems(token),
                     isLoading: homeProvider.isLoadingRecentlyAddedItems,
                     label:
                         productItemsRows.keys.toList()[0], // 'الأحدث في المتجر'
@@ -129,7 +130,9 @@ class HomeScreen extends StatelessWidget {
                 if (homeProvider.highRatedItems.isNotEmpty)
                   ProductItemsRow(
                     isErrorLoading: homeProvider.isErrorLoadingHighRatedItems,
-                    fetchItems: () => homeProvider.fetchHighRatedItems(token),
+                    fetchItems: homeProvider.isHighRatedItemsPageEnd
+                        ? null
+                        : () => homeProvider.fetchHighRatedItems(token),
                     isLoading: homeProvider.isLoadingHighRatedItems,
                     label:
                         productItemsRows.keys.toList()[1], // 'الأعلى تقييماً'
@@ -142,7 +145,9 @@ class HomeScreen extends StatelessWidget {
                 if (homeProvider.newItems.isNotEmpty)
                   ProductItemsRow(
                     isErrorLoading: homeProvider.isErrorLoadingNewItems,
-                    fetchItems: () => homeProvider.fetchNewItems(token),
+                    fetchItems: homeProvider.isNewItemsPageEnd
+                        ? null
+                        : () => homeProvider.fetchNewItems(token),
                     isLoading: homeProvider.isLoadingNewItems,
                     label: productItemsRows.keys.toList()[2], // 'جديد'
                     productItems: productItemsRows.values.toList()[2],
@@ -154,7 +159,9 @@ class HomeScreen extends StatelessWidget {
                 if (homeProvider.excellentItems.isNotEmpty)
                   ProductItemsRow(
                     isErrorLoading: homeProvider.isErrorLoadingExcellentItems,
-                    fetchItems: () => homeProvider.fetchExcellentItems(token),
+                    fetchItems: homeProvider.isExcellentItemsPageEnd
+                        ? null
+                        : () => homeProvider.fetchExcellentItems(token),
                     isLoading: homeProvider.isLoadingExcellentItems,
                     label: productItemsRows.keys.toList()[3], // 'مستخدم نظيف'
                     productItems: productItemsRows.values.toList()[3],

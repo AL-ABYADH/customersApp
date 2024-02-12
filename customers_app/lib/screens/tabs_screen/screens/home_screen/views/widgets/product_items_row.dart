@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../../../models/product_item.dart';
 import '../../../../../../theme/customers_theme.dart';
 import '../../../../../../widgets/product_item_card.dart';
-import '../../../../../../screens/product_item_details_screen/views/product_item_details_screen.dart';
 import '../../../../../../widgets/pagination_loading_error.dart';
 
 class ProductItemsRow extends StatefulWidget {
@@ -11,7 +10,7 @@ class ProductItemsRow extends StatefulWidget {
   final String label;
   final bool isLoading;
   final bool isErrorLoading;
-  final void Function() fetchItems;
+  final void Function()? fetchItems;
 
   const ProductItemsRow({
     required this.productItems,
@@ -37,8 +36,9 @@ class _ProductItemsRowState extends State<ProductItemsRow> {
 
   void _onScroll() {
     if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent) {
-      widget.fetchItems();
+            _scrollController.position.maxScrollExtent &&
+        widget.fetchItems != null) {
+      widget.fetchItems!();
     }
   }
 
@@ -65,8 +65,7 @@ class _ProductItemsRowState extends State<ProductItemsRow> {
                 ...widget.productItems.map(
                   (item) => ProductItemCard(
                     item: item,
-                    onClick: () => Navigator.of(context)
-                        .pushNamed(ProductItemDetailsScreen.routeName),
+                    category: widget.label,
                   ),
                 ),
                 const SizedBox(

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../theme/customers_theme.dart';
 import '../../../views/widgets/auth_field.dart';
-import '../../../../../widgets/my_button.dart';
+import '../../../../../widgets/auth_button.dart';
 import '../../../providers/auth_provider.dart';
 import '../providers/sign_up_provider.dart';
 
@@ -49,8 +49,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 50,
                       ),
                       AuthField(
-                        decoration:
-                            CustomersInputDecoration.primary(label: 'اسم المستخدم'),
+                        decoration: CustomersInputDecoration.primary(
+                            label: 'اسم المستخدم'),
                         inputType: TextInputType.text,
                         controller: signUpProvider.usernameController,
                       ),
@@ -58,8 +58,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 15,
                       ),
                       AuthField(
-                        decoration:
-                            CustomersInputDecoration.primary(label: 'الاسم الكامل'),
+                        decoration: CustomersInputDecoration.primary(
+                            label: 'الاسم الكامل'),
                         inputType: TextInputType.text,
                         controller: signUpProvider.fullNameController,
                       ),
@@ -67,8 +67,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 15,
                       ),
                       AuthField(
-                        decoration:
-                            CustomersInputDecoration.primary(label: 'رقم الهاتف'),
+                        decoration: CustomersInputDecoration.primary(
+                            label: 'رقم الهاتف'),
                         inputType: TextInputType.number,
                         controller: signUpProvider.phoneNumberController,
                       ),
@@ -76,8 +76,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 15,
                       ),
                       AuthField(
-                        decoration:
-                            CustomersInputDecoration.primary(label: 'كلمة المرور'),
+                        decoration: CustomersInputDecoration.primary(
+                            label: 'كلمة المرور'),
                         inputType: TextInputType.text,
                         controller: signUpProvider.passwordController,
                         obscureText: true,
@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       Consumer<SignUpProvider>(
                         builder: (context, signUpConsumer, _) {
-                          return MyButton(
+                          return AuthButton(
                             onClick: signUpConsumer.isLoading
                                 ? null
                                 : () => signUpProvider.signUp(context: context),
@@ -119,7 +119,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Text(
                             'هل تمتلك حساب بالفعل؟',
-                            style: CustomersTheme.textStyles.titleMedium.copyWith(
+                            style:
+                                CustomersTheme.textStyles.titleMedium.copyWith(
                               color: CustomersTheme.colors.displayTextColor,
                             ),
                             textAlign: TextAlign.right,

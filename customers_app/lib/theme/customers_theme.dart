@@ -40,6 +40,7 @@ class CustomersTheme {
 class CustomersColors {
   Color primaryColor = const Color.fromRGBO(69, 131, 95, 1);
   Color primaryColorTransparent = const Color.fromRGBO(89, 152, 115, 0.3);
+  Color text = const Color.fromARGB(255, 255, 255, 255);
   Color firstSecondaryColor = const Color.fromARGB(255, 81, 143, 234);
   Color secondSecondaryColor = const Color.fromARGB(255, 180, 180, 180);
   Color successColor = const Color.fromARGB(255, 0, 109, 62);
@@ -50,6 +51,11 @@ class CustomersColors {
   Color dialogNoteColor = const Color.fromARGB(255, 126, 126, 126);
   Color fieldContentColor = const Color(0xff599873);
   Color fieldLabel = Colors.grey;
+  Color verySlight = const Color(0xFF129049);
+  Color slight = const Color.fromARGB(255, 114, 145, 57);
+  Color noticeable = const Color.fromARGB(255, 219, 202, 42);
+  Color sever = const Color(0xFFc05b26);
+  Color verySever = const Color.fromARGB(255, 201, 62, 38);
 }
 
 class CustomersGradients {
@@ -76,7 +82,7 @@ class CustomersGradients {
 class CustomersTextStyles {
   TextStyle titleLarge = const TextStyle(
     fontFamily: 'Alexandria',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.w400,
     color: Color(0xff599873),
   );
@@ -94,6 +100,16 @@ class CustomersTextStyles {
   TextStyle display = const TextStyle(
     fontFamily: 'Alexandria',
     fontSize: 10,
+    color: Color.fromARGB(255, 117, 117, 117),
+  );
+  TextStyle displayLarge = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 12,
+    color: Color.fromARGB(255, 117, 117, 117),
+  );
+  TextStyle displayLarger = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 16,
     color: Color.fromARGB(255, 117, 117, 117),
   );
   TextStyle displayMedium = const TextStyle(
@@ -144,6 +160,42 @@ class CustomersTextStyles {
     fontSize: 13,
     color: CustomersTheme.colors.fieldContentColor,
     decoration: TextDecoration.none,
+  );
+  TextStyle priceFloor = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Color(0xff599873),
+  );
+  TextStyle currency = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+    color: Color(0xff599873),
+  );
+  TextStyle priceFraction = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: Color(0xff599873),
+  );
+  TextStyle priceFloorLarge = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Color(0xff599873),
+  );
+  TextStyle currencyLarge = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: Color(0xff599873),
+  );
+  TextStyle priceFractionLarge = const TextStyle(
+    fontFamily: 'Alexandria',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Color(0xff599873),
   );
 }
 

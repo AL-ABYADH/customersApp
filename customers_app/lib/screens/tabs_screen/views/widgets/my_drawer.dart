@@ -36,6 +36,7 @@ class MyDrawer extends StatelessWidget {
               await logout(context);
               if (!context.mounted) return;
               Navigator.of(context).pop();
+              scaffoldKey.currentState?.closeDrawer();
             },
             label: 'تأكيد',
             color: CustomersTheme.colors.errorColor,
@@ -45,7 +46,7 @@ class MyDrawer extends StatelessWidget {
           child: DialogButton(
             onClick: () => Navigator.of(context).pop(),
             label: 'تراجع',
-            color: CustomersTheme.colors.firstSecondaryColor,
+            color: CustomersTheme.colors.primaryColor,
           ),
         ),
         borderColor: CustomersTheme.colors.errorColor,

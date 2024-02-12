@@ -1,9 +1,11 @@
 class Price {
   final double price;
-  final String currency; // 'YER' | 'USD' | 'SAR'
+  final int floor;
+  final int fraction;
 
   Price({
     required this.price,
-    required this.currency,
+    required this.floor,
+    required this.fraction,
   });
 }

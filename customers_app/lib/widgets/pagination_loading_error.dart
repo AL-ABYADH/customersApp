@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PaginationLoadingError extends StatelessWidget {
-  final void Function() refresh;
+  final void Function()? refresh;
 
   const PaginationLoadingError({
     required this.refresh,

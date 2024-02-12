@@ -3,7 +3,7 @@ import 'package:easy_autocomplete/easy_autocomplete.dart';
 
 import '../../models/options_drop_down.dart';
 import '../../../../theme/customers_theme.dart';
-import '../../../../widgets/my_button.dart';
+import '../../../../widgets/auth_button.dart';
 
 class DropDown extends StatelessWidget {
   final OptionsDropDown dropDown;
@@ -40,7 +40,8 @@ class DropDown extends StatelessWidget {
                   padding: const EdgeInsets.all(5),
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                  child: Text(data, style: CustomersTheme.textStyles.titleMedium),
+                  child:
+                      Text(data, style: CustomersTheme.textStyles.titleMedium),
                 );
               },
               inputTextStyle: CustomersTheme.textStyles.fieldContent,
@@ -51,7 +52,7 @@ class DropDown extends StatelessWidget {
           ),
           Flexible(
             flex: 1,
-            child: MyButton(
+            child: AuthButton(
                 child: Text(
                   'تم',
                   style: CustomersTheme.textStyles.titleLarge.copyWith(

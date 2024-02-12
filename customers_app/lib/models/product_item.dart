@@ -1,12 +1,14 @@
 import './flaw.dart';
-import './price.dart';
 import '../../../../../models/feature.dart';
+import './price.dart';
 
 class ProductItem {
   final int id;
   final String desc;
   final int productId;
   final String productName;
+  final String seller;
+  final String model;
   final Price price;
   final String primImageUrl;
   final List<String> imageUrls;
@@ -23,6 +25,8 @@ class ProductItem {
     required this.desc,
     required this.productId,
     required this.productName,
+    required this.seller,
+    required this.model,
     required this.price,
     required this.primImageUrl,
     required this.imageUrls,

@@ -51,7 +51,7 @@ class LoginProvider with ChangeNotifier {
       if (response.statusCode == 400) {
         throw HttpException(responseData['message']);
       } else if (response.statusCode != 200) {
-        print(response.body);
+        // print(response.body);
         throw HttpException('حدث خطأ ما في النظام');
       }
 
@@ -64,6 +64,7 @@ class LoginProvider with ChangeNotifier {
           responseData['image'] != null && responseData['image'].isNotEmpty
               ? '${dotenv.env['URL']}${responseData["image"]}'
               : null;
+      final preferredCurrency = responseData['preferred_currency'];
 
       if (!context.mounted) return;
       Provider.of<UserProvider>(context, listen: false).createUser(
@@ -73,6 +74,7 @@ class LoginProvider with ChangeNotifier {
         name: name,
         phoneNumber: phoneNumber,
         imageUrl: imageUrl,
+        preferredCurrency: preferredCurrency,
       );
 
       await FirebaseAPI().initNotifications(userId!);
@@ -80,7 +82,7 @@ class LoginProvider with ChangeNotifier {
       isLoading = false;
       notifyListeners();
     } catch (err) {
-      // print(err);
+      print(err);
       isLoading = false;
       notifyListeners();
 

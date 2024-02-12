@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../theme/customers_theme.dart';
 import '../../../widgets/auth_button.dart';
 
-class RegistrationExtraInfoScreen extends StatelessWidget {
-  const RegistrationExtraInfoScreen({super.key});
-
+class ProfileSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('معلومات المستخدم'),
+        title: Text('معلومات المستخدم'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -24,9 +21,9 @@ class RegistrationExtraInfoScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               // Image Upload Section
-              SizedBox(
+              Container(
                 width: double.infinity,
                 height: 300, // Set a fixed height for the image container
                 child: AspectRatio(
@@ -41,26 +38,26 @@ class RegistrationExtraInfoScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               Text(
                 'العنوان',
                 style: CustomersTheme.textStyles.titleLarge.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               TextField(
                 decoration:
                     CustomersInputDecoration.primary(label: "ادخل العنوان"),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               Text(
                 'العملة المستخدمة',
                 style: CustomersTheme.textStyles.titleLarge.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               // Currency Selection Section
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
@@ -95,7 +92,7 @@ class RegistrationExtraInfoScreen extends StatelessWidget {
                   // Handle currency selection here
                 },
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               // Save Button
               AuthButton(
                 onClick: () {

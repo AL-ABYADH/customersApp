@@ -3,10 +3,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../models/product_item.dart';
-import '../../../models/price.dart';
 import '../../../models/feature.dart';
 import '../../../models/flaw.dart';
 import '../../../utils/send_get.dart';
+import '../../../models/price.dart';
 
 class BrandProductItemsProvider with ChangeNotifier {
   List<ProductItem> _items = [];
@@ -24,7 +24,7 @@ class BrandProductItemsProvider with ChangeNotifier {
   Future<void> fetchBrandProductItems(String token, int productId) async {
     final url = Uri.parse(
         '${dotenv.env['URL']}/api/product-items/all-product-items/$productId');
-    print(url);
+    // print(url);
     try {
       final responseData =
           await sendGet(url: url, client: _client, token: token);
@@ -52,11 +52,18 @@ class BrandProductItemsProvider with ChangeNotifier {
           desc: productItem['desc'],
           productId: productItem['productId'],
           productName: productItem['productName'],
+          seller: productItem['seller'],
+          model: productItem['model'],
           price: Price(
-              price: productItem['price'], currency: productItem['currency']),
+            price: productItem['price'],
+            floor: productItem['price'].floor(),
+            fraction: int.parse(productItem['price']
+                .toString()
+                .substring(productItem['price'].toString().length - 2)),
+          ),
           primImageUrl: '${dotenv.env['URL']}${productItem['primImageUrl']}',
           imageUrls: productItem['imageUrls']
-              .map((url) => '${dotenv.env['URL']}url')
+              .map((url) => '${dotenv.env['URL']}$url')
               .whereType<String>()
               .toList(),
           rating: productItem['rating'],
