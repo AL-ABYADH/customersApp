@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/home_provider.dart';
-import '../../../../../screens/search_screen/views/search_screen.dart';
+// import '../../../../../screens/search_screen/views/search_screen.dart';
 import '../../../../../theme/customers_theme.dart';
 import './widgets/product_items_row.dart';
 import '../../../../../models/product_item.dart';
@@ -28,11 +28,12 @@ class HomeScreen extends StatelessWidget {
       'مستخدم نظيف': homeProvider.excellentItems,
     };
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: CustomersTheme.colors.backgroundColor,
-        body: FutureBuilder(
+    return Scaffold(
+      backgroundColor: CustomersTheme.colors.backgroundColor,
+      body: RefreshIndicator(
+        onRefresh: () async => await homeProvider.fetchHomeProductItems(token),
+        color: CustomersTheme.colors.primaryColor,
+        child: FutureBuilder(
           future: !homeProvider.homeProductItemsFetched
               ? homeProvider.fetchHomeProductItems(token)
               : null,
@@ -57,56 +58,56 @@ class HomeScreen extends StatelessWidget {
             }
             return ListView(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
-                          ),
-                          margin: const EdgeInsets.all(10),
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.search,
-                                color: Colors.grey,
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text('ابحث عن جهاز',
-                                    style:
-                                        CustomersTheme.textStyles.fieldLabel),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.of(context)
-                              .pushNamed(SearchScreen.routeName);
-                        },
-                      ),
-                    ),
-                    GestureDetector(
-                        child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white,
-                      ),
-                      width: 45,
-                      height: 44,
-                      margin: const EdgeInsets.only(left: 10),
-                      padding: const EdgeInsets.all(5),
-                      child: Image.asset(
-                        "lib/assets/icons/filter.png",
-                        color: CustomersTheme.colors.primaryColor,
-                      ),
-                    ))
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: InkWell(
+                //         child: Container(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(5),
+                //             color: Colors.white,
+                //           ),
+                //           margin: const EdgeInsets.all(10),
+                //           padding: const EdgeInsets.all(10),
+                //           child: Row(
+                //             children: [
+                //               const Icon(
+                //                 Icons.search,
+                //                 color: Colors.grey,
+                //               ),
+                //               Container(
+                //                 padding:
+                //                     const EdgeInsets.symmetric(horizontal: 10),
+                //                 child: Text('ابحث عن جهاز',
+                //                     style:
+                //                         CustomersTheme.textStyles.fieldLabel),
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //         onTap: () {
+                //           Navigator.of(context)
+                //               .pushNamed(SearchScreen.routeName);
+                //         },
+                //       ),
+                //     ),
+                //     GestureDetector(
+                //         child: Container(
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(5),
+                //         color: Colors.white,
+                //       ),
+                //       width: 45,
+                //       height: 44,
+                //       margin: const EdgeInsets.only(left: 10),
+                //       padding: const EdgeInsets.all(5),
+                //       child: Image.asset(
+                //         "lib/assets/icons/filter.png",
+                //         color: CustomersTheme.colors.primaryColor,
+                //       ),
+                //     ))
+                //   ],
+                // ),
                 if (homeProvider.recentlyAddedItems.isNotEmpty)
                   const SizedBox(
                     height: 15,

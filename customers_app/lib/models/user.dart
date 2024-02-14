@@ -6,6 +6,7 @@ class User {
   final String token;
   String? imageUrl;
   String preferredCurrency;
+  int cartItemsCount;
 
   User({
     required this.userId,
@@ -15,5 +16,6 @@ class User {
     required this.phoneNumber,
     required this.imageUrl,
     required this.preferredCurrency,
+    required this.cartItemsCount,
   });
 }

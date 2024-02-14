@@ -8,6 +8,7 @@ import '../../../../providers/user_provider.dart';
 import '../../../../widgets/my_alert_dialog.dart';
 import '../../../../widgets/loading_dialog.dart';
 import '../../../../widgets/dialog_button.dart';
+import '../../../../providers/user_provider.dart';
 
 class MyDrawer extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -60,8 +61,48 @@ class MyDrawer extends StatelessWidget {
       child: Consumer<TabsProvider>(builder: (context, tabsScreenConsumer, _) {
         return Column(
           children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(CustomersTheme.radius),
+                bottomRight: Radius.circular(CustomersTheme.radius),
+              ),
+              child: Container(
+                color: CustomersTheme.colors.primaryColor,
+                height: 170,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset(
+                            'lib/assets/images/profile_placeholder.png'),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            Provider.of<UserProvider>(context).name!,
+                            style: CustomersTheme.textStyles.titleLarge
+                                .copyWith(color: Colors.white),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(
-              height: 30,
+              height: 15,
             ),
             DrawerItem(
               icon: const Icon(Icons.add),

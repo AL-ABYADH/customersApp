@@ -4,16 +4,12 @@ import 'package:provider/provider.dart';
 import '../screens/orders_screen/providers/order_provider.dart';
 import '../screens/orders_screen/views/order_screen.dart';
 import '../screens/home_screen/views/home_screen.dart';
-import '../screens/home_screen/providers/home_provider.dart';
 import '../screens/brows_screen.dart/views/brows_screen.dart';
 import '../screens/brows_screen.dart/providers/brows_provider.dart';
 
 class TabsProvider with ChangeNotifier {
   List<Widget> pages = [
-    ChangeNotifierProvider.value(
-      value: HomeProvider(),
-      child: const HomeScreen(),
-    ),
+    const HomeScreen(),
     ChangeNotifierProvider.value(
       value: BrowsProvider(),
       child: const BrowsScreen(),
@@ -24,25 +20,24 @@ class TabsProvider with ChangeNotifier {
     ),
   ];
 
-  int selectedPageIndex = 0;
+  int _selectedPageIndex = 0;
+  PageController pageController = PageController();
+
+  int get selectedPageIndex => _selectedPageIndex;
+
   void updateSelectedPageIndex(int index) {
-    selectedPageIndex = index;
+    _selectedPageIndex = index;
     notifyListeners();
   }
 
   void selectPage(int index) {
-    pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.ease,
-    );
+    pageController.jumpToPage(index);
+    updateSelectedPageIndex(index);
   }
-
-  PageController pageController = PageController(initialPage: 0);
 
   @override
   void dispose() {
-    super.dispose();
     pageController.dispose();
+    super.dispose();
   }
 }

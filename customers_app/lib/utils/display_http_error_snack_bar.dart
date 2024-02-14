@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import './show_error_snack_bar.dart';
+import 'display_error_snack_bar.dart';
 
-void showHttpErrorSnackBar({
+void displayHttpErrorSnackBar({
   required BuildContext ctx,
   required Object err,
   required bool showServerError,
@@ -14,11 +14,11 @@ void showHttpErrorSnackBar({
     ScaffoldMessenger.maybeOf(ctx)!.hideCurrentSnackBar();
 
     if (err is TimeoutException || err is SocketException) {
-      showErrorSnackBar(ctx, 'تحقق من اتصالك بالشبكة');
+      displayErrorSnackBar(ctx, 'تحقق من اتصالك بالشبكة');
     } else if (showServerError) {
-      showErrorSnackBar(ctx, err.toString());
+      displayErrorSnackBar(ctx, err.toString());
     } else {
-      showErrorSnackBar(ctx, 'فشلت العملية، حدث خطأ ما في النظام');
+      displayErrorSnackBar(ctx, 'فشلت العملية، حدث خطأ ما في النظام');
     }
   }
 }

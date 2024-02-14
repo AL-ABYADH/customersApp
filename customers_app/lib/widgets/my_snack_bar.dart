@@ -28,7 +28,7 @@ class MySnackBar extends StatelessWidget {
             color: borderColor,
             width: 1.5,
           ),
-          color: CustomersTheme.colors.backgroundColor,
+          color: Colors.transparent,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

@@ -88,7 +88,7 @@ class CustomersTextStyles {
   );
   TextStyle listDividerLabel = TextStyle(
     fontFamily: 'Alexandria',
-    fontSize: 10,
+    fontSize: 13,
     color: CustomersTheme.colors.primaryColor,
     decoration: TextDecoration.none,
   );

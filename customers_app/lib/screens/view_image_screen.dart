@@ -32,7 +32,7 @@ class _ViewImageScreenState extends State<ViewImageScreen> {
         child: Swiper(
           itemBuilder: (context, index) => Center(
             child: Image.network(
-              widget.imageUrls[index],
+              widget.imageUrls[widget.imageIndex],
               fit: BoxFit.fill,
             ),
           ),

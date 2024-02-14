@@ -6,11 +6,13 @@ class BottomButton extends StatelessWidget {
   final Widget child;
   final Widget? icon;
   final void Function()? onClick;
+  final Color color;
 
   const BottomButton({
     required this.child,
-    required this.icon,
     required this.onClick,
+    required this.color,
+    this.icon,
     super.key,
   });
 
@@ -29,19 +31,19 @@ class BottomButton extends StatelessWidget {
             ),
           ),
           padding: const EdgeInsets.all(16),
-          backgroundColor: CustomersTheme.colors.primaryColor,
+          backgroundColor: color,
         ),
-        child: icon != null
-            ? Row(
-                children: [
-                  icon!,
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  child,
-                ],
-              )
-            : child,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            icon!,
+            if (icon != null)
+              const SizedBox(
+                width: 10,
+              ),
+            child,
+          ],
+        ),
       ),
     );
   }

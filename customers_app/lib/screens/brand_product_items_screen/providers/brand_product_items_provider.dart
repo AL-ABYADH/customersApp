@@ -9,15 +9,15 @@ import '../../../utils/send_get.dart';
 import '../../../models/price.dart';
 
 class BrandProductItemsProvider with ChangeNotifier {
-  List<ProductItem> _items = [];
+  List<ProductItem> _productItems = [];
 
-  List<ProductItem> get items => _items;
+  List<ProductItem> get productItems => _productItems;
 
   final _client = http.Client();
 
-  var itemsFetched = false;
-  void refetchItems() {
-    itemsFetched = false;
+  var productItemsFetched = false;
+  void refetchProductItems() {
+    productItemsFetched = false;
     notifyListeners();
   }
 
@@ -31,12 +31,12 @@ class BrandProductItemsProvider with ChangeNotifier {
 
       final List<ProductItem> loadedProductItems =
           getLoadedProductItems(responseData);
-      itemsFetched = true;
-      _items = loadedProductItems;
+      productItemsFetched = true;
+      _productItems = loadedProductItems;
       notifyListeners();
     } catch (err) {
       print(err);
-      itemsFetched = true;
+      productItemsFetched = true;
       notifyListeners();
       rethrow;
     }
@@ -54,6 +54,7 @@ class BrandProductItemsProvider with ChangeNotifier {
           productName: productItem['productName'],
           seller: productItem['seller'],
           model: productItem['model'],
+          inCart: productItem['inCart'],
           price: Price(
             price: productItem['price'],
             floor: productItem['price'].floor(),
@@ -86,5 +87,21 @@ class BrandProductItemsProvider with ChangeNotifier {
       );
     }
     return loadedProductItems;
+  }
+
+  void addToCart(int productItemId) {
+    final items =
+        _productItems.where((productItem) => productItem.id == productItemId);
+    for (final item in items) {
+      item.addToCart();
+    }
+  }
+
+  void removeFromCart(int productItemId) {
+    final items =
+        _productItems.where((productItem) => productItem.id == productItemId);
+    for (final item in items) {
+      item.removeFromCart();
+    }
   }
 }

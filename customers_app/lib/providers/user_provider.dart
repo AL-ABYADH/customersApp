@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user.dart';
 import '../api/firebase_api.dart';
-import '../utils/show_http_error_snack_bar.dart';
+import '../screens/tabs_screen/screens/home_screen/providers/home_provider.dart';
+import '../utils/display_http_error_snack_bar.dart';
 
 class UserProvider with ChangeNotifier {
   User? _user;
@@ -39,6 +41,10 @@ class UserProvider with ChangeNotifier {
     return _user!.preferredCurrency;
   }
 
+  int? get cartItemsCount {
+    return _user!.cartItemsCount;
+  }
+
   String? get token {
     if (_user != null) {
       return _user!.token;
@@ -64,6 +70,7 @@ class UserProvider with ChangeNotifier {
     required String phoneNumber,
     required String? imageUrl,
     required String preferredCurrency,
+    required int cartItemsCount,
   }) async {
     _user = User(
       token: token,
@@ -73,6 +80,7 @@ class UserProvider with ChangeNotifier {
       phoneNumber: phoneNumber,
       imageUrl: imageUrl,
       preferredCurrency: preferredCurrency,
+      cartItemsCount: cartItemsCount,
     );
     notifyListeners();
 
@@ -85,6 +93,7 @@ class UserProvider with ChangeNotifier {
       'phoneNumber': _user!.phoneNumber,
       'imageUrl': _user!.imageUrl,
       'preferredCurrency': _user!.preferredCurrency,
+      'cartItemsCount': _user!.cartItemsCount,
     });
     prefs.setString('userData', userData);
   }
@@ -104,6 +113,7 @@ class UserProvider with ChangeNotifier {
     final username = extractedUserData['username'] as String;
     final imageUrl = extractedUserData['imageUrl'] as String?;
     final preferredCurrency = extractedUserData['preferredCurrency'] as String;
+    final cartItemsCount = extractedUserData['cartItemsCount'] as int;
 
     _user = User(
       token: token,
@@ -113,6 +123,7 @@ class UserProvider with ChangeNotifier {
       phoneNumber: phoneNumber,
       imageUrl: imageUrl,
       preferredCurrency: preferredCurrency,
+      cartItemsCount: cartItemsCount,
     );
 
     // FirebaseAPI().initPushAndLocalNotifications();
@@ -120,22 +131,57 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> logout(BuildContext context) async {
+  Future<void> logout(BuildContext ctx) async {
     try {
       await FirebaseAPI()
           .unsubscribe(userId!)
           .timeout(const Duration(seconds: 15));
     } catch (err) {
       // print(err);
-      if (!context.mounted) return;
-      showHttpErrorSnackBar(ctx: context, err: err, showServerError: false);
+      if (!ctx.mounted) return;
+      displayHttpErrorSnackBar(ctx: ctx, err: err, showServerError: false);
       return;
     }
 
     _user = null;
+    if (!ctx.mounted) return;
+    Provider.of<HomeProvider>(ctx, listen: false).resetProvider();
     notifyListeners();
 
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
+  }
+
+  Future<void> incrementCartItemsCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    final extractedUserData =
+        json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+    extractedUserData['cartItemsCount']++;
+    prefs.setString('userData', json.encode(extractedUserData));
+
+    _user!.cartItemsCount++;
+    notifyListeners();
+  }
+
+  Future<void> decrementCartItemsCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    final extractedUserData =
+        json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+    extractedUserData['cartItemsCount']--;
+    prefs.setString('userData', json.encode(extractedUserData));
+
+    _user!.cartItemsCount--;
+    notifyListeners();
+  }
+
+  Future<void> emptyCartItemsCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    final extractedUserData =
+        json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+    extractedUserData['cartItemsCount'] = 0;
+    prefs.setString('userData', json.encode(extractedUserData));
+
+    _user!.cartItemsCount = 0;
+    notifyListeners();
   }
 }

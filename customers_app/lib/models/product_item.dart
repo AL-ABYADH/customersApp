@@ -19,6 +19,7 @@ class ProductItem {
       usedProductCondition; // 'excellent' | 'good' | 'normal' | 'bad' | 'terrible'
   final List<Flaw> flaws;
   final List<Feature> features;
+  bool inCart;
 
   ProductItem({
     required this.id,
@@ -36,5 +37,14 @@ class ProductItem {
     this.usedProductCondition,
     required this.flaws,
     required this.features,
+    required this.inCart,
   });
+
+  void addToCart() {
+    inCart = true;
+  }
+
+  void removeFromCart() {
+    inCart = false;
+  }
 }

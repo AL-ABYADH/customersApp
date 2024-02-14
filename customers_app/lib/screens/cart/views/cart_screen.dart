@@ -1,128 +1,143 @@
-import 'dart:ui';
+import 'dart:async';
+import 'dart:io';
+
 import 'package:customers_app/theme/customers_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class CartPage extends StatelessWidget {
-  const CartPage({Key? key});
+import '../../../providers/user_provider.dart';
+import '../../../widgets/bottom_button.dart';
+import '../../../widgets/loading_error.dart';
+import '../../../widgets/primary_app_bar.dart';
+import '../providers/cart_provider.dart';
+import './widgets/cart_items_list.dart';
+
+class CartScreen extends StatelessWidget {
+  static const routeName = 'cart-screen';
+
+  const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    final token = Provider.of<UserProvider>(context, listen: false).token!;
+
+    String currencyDisplay = '';
+    switch (Provider.of<UserProvider>(context).preferredCurrency) {
+      case 'USD':
+        currencyDisplay = '\$';
+        break;
+      case 'YER':
+        currencyDisplay = 'ريال يمني';
+        break;
+      case 'SAR':
+        currencyDisplay = 'ريال سعودي';
+        break;
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: CustomersTheme.colors.primaryColor,
+      appBar: PrimaryAppBar(
+        title: Text(
+          'سلة المشتريات',
+          style: CustomersTheme.textStyles.titleLarge,
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: Text(
-              "سلة المشتريات",
-              style: CustomersTheme.textStyles.titleLarge.copyWith(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: ListView.builder(
-                itemCount: 3, // Replace with your actual item count
-                padding: EdgeInsets.all(12),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: CustomersTheme.colors.fieldFillColor,
-                        borderRadius: BorderRadius.circular(CustomersTheme.radius),
-                      ),
-                      child: ListTile(
-                        leading: Image.network(
-                          'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif', // Replace with actual asset path
-                          height: 36,
-                        ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Item ${index + 1}', // Replace with actual item name
-                              style: CustomersTheme.textStyles.titleMedium,
-                            ),
-                            Text(
-                              '\$10.00', // Replace with actual price
-                              style: CustomersTheme.textStyles.labelSmall,
-                            ),
-                          ],
-                        ),
-                        trailing: SizedBox.shrink(), // Remove IconButton
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(36.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(CustomersTheme.radius),
-                color: CustomersTheme.colors.successColor,
-              ),
-              padding: const EdgeInsets.all(24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      backgroundColor: CustomersTheme.colors.backgroundColor,
+      body: RefreshIndicator(
+        onRefresh: () async => await cartProvider.fetchCartProductItems(token),
+        color: CustomersTheme.colors.primaryColor,
+        child: FutureBuilder(
+          future: cartProvider.cartProductItemsFetched
+              ? null
+              : cartProvider.fetchCartProductItems(token),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: CustomersTheme.colors.primaryColor,
+                ),
+              );
+            } else if (snapshot.error != null) {
+              return snapshot.error is SocketException ||
+                      snapshot.error is TimeoutException
+                  ? LoadingError(
+                      message: 'تحقق من اتصالك بالشبكة ثم قم',
+                      refresh: cartProvider.refetchCartProductItems,
+                    )
+                  : LoadingError(
+                      message: 'حدث خطأ ما في النظام، قم',
+                      refresh: cartProvider.refetchCartProductItems,
+                    );
+            } else {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'السعر الإجمالي',
-                        style: CustomersTheme.textStyles.display.copyWith(
-                          color: CustomersTheme.colors.primaryColor,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        '\$30.00', // Replace with actual total price
-                        style: CustomersTheme.textStyles.titleMedium.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: CustomersTheme.colors.primaryColor),
-                      borderRadius: BorderRadius.circular(28),
-                    ),
-                    padding: const EdgeInsets.all(12),
-                    child: Row(
-                      children: const [
-                        Text(
-                          'اطلب الآن',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                      ],
+                  Expanded(
+                    child: CartItemsList(
+                      cartProductItems: cartProvider.cartProductItems,
                     ),
                   ),
+                  if (cartProvider.cartProductItems.isNotEmpty)
+                    SizedBox(
+                      height: 70,
+                      child: BottomButton(
+                        onClick:
+                            cartProvider.isLoading || cartProvider.isRemoving
+                                ? () {}
+                                : () async => await cartProvider.createOrder(
+                                      token: token,
+                                      ctx: context,
+                                    ),
+                        color: CustomersTheme.colors.primaryColor,
+                        icon: const Icon(Icons.shopping_cart),
+                        child: cartProvider.isLoading
+                            ? const Expanded(
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 25,
+                                      width: 25,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: SizedBox(),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Expanded(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'اطلب الآن!',
+                                      style: CustomersTheme
+                                          .textStyles.displayLarger
+                                          .copyWith(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const Expanded(child: SizedBox()),
+                                    Text(
+                                      '${cartProvider.totalPrice.toStringAsFixed(2)} $currencyDisplay',
+                                      style: CustomersTheme
+                                          .textStyles.displayLarge
+                                          .copyWith(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                      ),
+                    ),
                 ],
-              ),
-            ),
-          ),
-        ],
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../../../api/firebase_api.dart';
 import '../../../../../models/http_exception.dart';
 import '../../../../../providers/user_provider.dart';
-import '../../../../../utils/show_http_error_snack_bar.dart';
+import '../../../../../utils/display_http_error_snack_bar.dart';
 
 class LoginProvider with ChangeNotifier {
   var isLoading = false;
@@ -65,6 +65,7 @@ class LoginProvider with ChangeNotifier {
               ? '${dotenv.env['URL']}${responseData["image"]}'
               : null;
       final preferredCurrency = responseData['preferred_currency'];
+      final cartItemsCount = responseData['cart_items_count'];
 
       if (!context.mounted) return;
       Provider.of<UserProvider>(context, listen: false).createUser(
@@ -75,6 +76,7 @@ class LoginProvider with ChangeNotifier {
         phoneNumber: phoneNumber,
         imageUrl: imageUrl,
         preferredCurrency: preferredCurrency,
+        cartItemsCount: cartItemsCount,
       );
 
       await FirebaseAPI().initNotifications(userId!);
@@ -87,7 +89,7 @@ class LoginProvider with ChangeNotifier {
       notifyListeners();
 
       if (!context.mounted) return;
-      showHttpErrorSnackBar(ctx: context, err: err, showServerError: true);
+      displayHttpErrorSnackBar(ctx: context, err: err, showServerError: true);
     }
   }
 

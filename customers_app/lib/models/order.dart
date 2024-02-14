@@ -1,15 +1,20 @@
+import 'price.dart';
+import 'product_item.dart';
+
 class Order {
   final int id;
   final String status;
   final String sellerName;
-  final double price;
-  final String date;
+  final Price totalPrice;
+  final DateTime date;
+  final List<ProductItem> productItems;
 
   Order({
     required this.id,
     required this.status,
     required this.sellerName,
-    required this.price,
+    required this.totalPrice,
     required this.date,
+    required this.productItems,
   });
 }

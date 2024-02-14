@@ -4,14 +4,14 @@
 
 // // Your CustomersTheme and related classes should be defined above or in a separate file and imported.
 
-// class OrderItem {
+// class OrderListItem {
 //   final String sellerFullName;
 //   final DateTime orderDateTime;
 //   final double totalPrice;
 //   final int itemCount;
 //   final List<String> itemsList;
 
-//   OrderItem({
+//   OrderListItem({
 //     required this.sellerFullName,
 //     required this.orderDateTime,
 //     required this.totalPrice,
@@ -21,7 +21,7 @@
 // }
 
 // class OrderDetailsPage extends StatelessWidget {
-//   final OrderItem orderItem;
+//   final OrderListItem orderItem;
 
 //   const OrderDetailsPage({required this.orderItem, Key? key}) : super(key: key);
 
@@ -117,14 +117,14 @@ import 'package:intl/intl.dart'; // For date formatting
 
 // Your CustomersTheme and related classes should be defined above or in a separate file and imported.
 
-class OrderItem {
+class OrderListItem {
   final String sellerFullName;
   final DateTime orderDateTime;
   final double totalPrice;
   final int itemCount;
   final List<String> itemsList;
 
-  OrderItem({
+  OrderListItem({
     required this.sellerFullName,
     required this.orderDateTime,
     required this.totalPrice,
@@ -134,7 +134,7 @@ class OrderItem {
 }
 
 class OrderDetailsPage extends StatelessWidget {
-  final OrderItem orderItem;
+  final OrderListItem orderItem;
 
   const OrderDetailsPage({required this.orderItem, Key? key}) : super(key: key);
 
@@ -142,7 +142,8 @@ class OrderDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('معلومات الطلب', style: CustomersTheme.textStyles.titleLarge),
+        title:
+            Text('معلومات الطلب', style: CustomersTheme.textStyles.titleLarge),
         backgroundColor: CustomersTheme.colors.primaryColor,
         centerTitle: true,
         elevation: 0,
@@ -152,19 +153,21 @@ class OrderDetailsPage extends StatelessWidget {
           Card(
             margin: EdgeInsets.zero, // No space around the card
             elevation: 4,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.zero, // No rounded corners
             ),
             child: Padding(
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch the columns to the full width of the card
+                crossAxisAlignment: CrossAxisAlignment
+                    .stretch, // Stretch the columns to the full width of the card
                 children: [
                   _buildDetailItem('البائع', orderItem.sellerFullName),
                   _buildDivider(),
                   _buildDetailItem(
                     'تاريخ الطلب',
-                    DateFormat('dd MMM yyyy – hh:mm a').format(orderItem.orderDateTime),
+                    DateFormat('dd MMM yyyy – hh:mm a')
+                        .format(orderItem.orderDateTime),
                   ),
                   _buildDivider(),
                   _buildDetailItem(
@@ -172,15 +175,19 @@ class OrderDetailsPage extends StatelessWidget {
                     '\$${orderItem.totalPrice.toStringAsFixed(2)}',
                   ),
                   _buildDivider(),
-                  _buildDetailItem('عدد الطلبات', orderItem.itemCount.toString()),
+                  _buildDetailItem(
+                      'عدد الطلبات', orderItem.itemCount.toString()),
                   _buildDivider(),
                   ListTile(
                     title: Text(
                       'قائمة الطلبات',
-                      style: CustomersTheme.textStyles.titleLarge.copyWith(fontWeight: FontWeight.bold),
+                      style: CustomersTheme.textStyles.titleLarge
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  ...orderItem.itemsList.map((item) => _buildItem(item)).toList(),
+                  ...orderItem.itemsList
+                      .map((item) => _buildItem(item))
+                      .toList(),
                 ],
               ),
             ),
@@ -192,14 +199,16 @@ class OrderDetailsPage extends StatelessWidget {
 
   Widget _buildDetailItem(String label, String value) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: RichText(
         text: TextSpan(
-          style: CustomersTheme.textStyles.display.copyWith(color: CustomersTheme.colors.fieldContentColor),
+          style: CustomersTheme.textStyles.display
+              .copyWith(color: CustomersTheme.colors.fieldContentColor),
           children: [
             TextSpan(
               text: '$label: ',
-              style: CustomersTheme.textStyles.titleMedium.copyWith(fontWeight: FontWeight.bold),
+              style: CustomersTheme.textStyles.titleMedium
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             TextSpan(text: value),
           ],
@@ -214,11 +223,12 @@ class OrderDetailsPage extends StatelessWidget {
 
   Widget _buildItem(String item) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: ListTile(
         title: Text(
           item,
-          style: CustomersTheme.textStyles.display.copyWith(color: CustomersTheme.colors.fieldContentColor),
+          style: CustomersTheme.textStyles.display
+              .copyWith(color: CustomersTheme.colors.fieldContentColor),
         ),
       ),
     );

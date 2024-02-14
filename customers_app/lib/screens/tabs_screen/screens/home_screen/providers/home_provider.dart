@@ -47,6 +47,14 @@ class HomeProvider with ChangeNotifier {
       _highRatedItems = getLoadedProductItems(loadedHighRatedItems);
       _newItems = getLoadedProductItems(loadedNewItems);
       _excellentItems = getLoadedProductItems(loadedExcellentItems);
+      isRecentlyAddedItemsPageEnd = false;
+      isHighRatedItemsPageEnd = false;
+      isNewItemsPageEnd = false;
+      isExcellentItemsPageEnd = false;
+      recentlyAddedItemsPage = 2;
+      highRatedItemsPage = 2;
+      newItemsPage = 2;
+      excellentItemsPage = 2;
       notifyListeners();
     } catch (err) {
       print(err);
@@ -248,6 +256,7 @@ class HomeProvider with ChangeNotifier {
     final List<ProductItem> loadedProductItems = [];
 
     for (final productItem in fetchedItems) {
+      // print('${productItem['productName']}: ${productItem['id']}');
       loadedProductItems.add(
         ProductItem(
           id: productItem['id'],
@@ -256,6 +265,7 @@ class HomeProvider with ChangeNotifier {
           productName: productItem['productName'],
           seller: productItem['seller'],
           model: productItem['model'],
+          inCart: productItem['inCart'],
           price: Price(
             price: productItem['price'],
             floor: productItem['price'].floor(),
@@ -288,5 +298,58 @@ class HomeProvider with ChangeNotifier {
       );
     }
     return loadedProductItems;
+  }
+
+  void addToCart(int productItemId) {
+    final items = [
+      ..._recentlyAddedItems,
+      ..._highRatedItems,
+      ..._newItems,
+      ..._excellentItems
+    ].where((productItem) => productItem.id == productItemId);
+    for (final item in items) {
+      item.addToCart();
+    }
+  }
+
+  void removeFromCart(int productItemId) {
+    final items = [
+      ..._recentlyAddedItems,
+      ..._highRatedItems,
+      ..._newItems,
+      ..._excellentItems
+    ].where((productItem) => productItem.id == productItemId);
+    for (final item in items) {
+      item.removeFromCart();
+    }
+  }
+
+  void resetProvider() {
+    _recentlyAddedItems.clear();
+    _highRatedItems.clear();
+    _newItems.clear();
+    _excellentItems.clear();
+    isRecentlyAddedItemsPageEnd = false;
+    isHighRatedItemsPageEnd = false;
+    isNewItemsPageEnd = false;
+    isExcellentItemsPageEnd = false;
+    recentlyAddedItemsPage = 2;
+    highRatedItemsPage = 2;
+    newItemsPage = 2;
+    excellentItemsPage = 2;
+    homeProductItemsFetched = false;
+    recentlyAddedItemsFetched = false;
+    highRatedItemsFetched = false;
+    newItemsFetched = false;
+    excellentItemsFetched = false;
+    isLoadingRecentlyAddedItems = false;
+    isErrorLoadingRecentlyAddedItems = false;
+    isLoadingHighRatedItems = false;
+    isErrorLoadingHighRatedItems = false;
+    isLoadingNewItems = false;
+    isErrorLoadingNewItems = false;
+    isLoadingExcellentItems = false;
+    isErrorLoadingExcellentItems = false;
+    notifyListeners();
   }
 }

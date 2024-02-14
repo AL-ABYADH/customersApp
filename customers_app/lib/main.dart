@@ -56,10 +56,13 @@ class MyApp extends StatelessWidget {
           create: (ctx) => RegistrationExtraInfoProvider(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => CartProvider(),
+          create: (ctx) => OrderDetailsProvider(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => OrderDetailsProvider(),
+          create: (ctx) => HomeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => CartProvider(),
         ),
       ],
       child: Consumer<UserProvider>(builder: (context, userConsumer, _) {
@@ -108,6 +111,7 @@ class MyApp extends StatelessWidget {
                   value: BrandProductItemsProvider(),
                   child: const BrandProductItemsScreen(),
                 ),
+            CartScreen.routeName: (ctx) => const CartScreen(),
           },
         );
       }),

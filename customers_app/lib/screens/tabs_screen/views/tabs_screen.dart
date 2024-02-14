@@ -1,61 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/user_provider.dart';
+import '../../cart/views/cart_screen.dart';
 import '../providers/tabs_provider.dart';
 import './widgets/my_bottom_nav_bar.dart';
 import './widgets/my_drawer.dart';
 import '../../../theme/customers_theme.dart';
+import '../../../widgets/count_badge.dart';
 
 class TabsScreen extends StatelessWidget {
-  TabsScreen({super.key});
+  TabsScreen({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TabsProvider>(builder: (context, tabsConsumer, _) {
-      return Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-            // toolbarHeight: 40,
-            systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: CustomersTheme.colors.primaryColor,
-                statusBarBrightness: Brightness.dark,
-                statusBarIconBrightness: Brightness.dark),
-            leading: IconButton(
-              // Use an IconButton for the icon
-              icon: Icon(Icons.menu,
-                  color: CustomersTheme.colors.primaryColor, size: 35),
-              onPressed: () {
-                // Open the drawer when the IconButton is pressed
-                _scaffoldKey.currentState?.openDrawer();
-              },
-            ),
-            backgroundColor: CustomersTheme.colors.backgroundColor,
-            actions: [
-              Icon(
-                Icons.account_circle,
-                color: CustomersTheme.colors.primaryColor,
-                size: 35,
-              ),
-              const SizedBox(
-                width: 15,
-              )
-            ],
-            // title: const Text("الصفحة الرئيسية"),
-            // titleTextStyle: CustomersTheme.textStyles.titleLarge,
-            elevation: 0.0),
-        drawer: MyDrawer(
-          scaffoldKey: _scaffoldKey,
+    final tabsProvider = Provider.of<TabsProvider>(context);
+
+    tabsProvider.pageController = PageController(
+      initialPage: tabsProvider.selectedPageIndex,
+    );
+
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu,
+              color: CustomersTheme.colors.primaryColor, size: 35),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
         ),
-        backgroundColor: CustomersTheme.colors.primaryColor,
-        bottomNavigationBar: const MyBottomNavBar(),
-        body: PageView(
-          controller: tabsConsumer.pageController,
-          onPageChanged: (index) => tabsConsumer.updateSelectedPageIndex(index),
-          children: tabsConsumer.pages,
-        ),
-      );
-    });
+        backgroundColor: CustomersTheme.colors.backgroundColor,
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () =>
+                Navigator.of(context).pushNamed(CartScreen.routeName),
+            icon: Consumer<UserProvider>(builder: (context, userConsumer, _) {
+              return userConsumer.cartItemsCount == 0
+                  ? Icon(
+                      Icons.shopping_cart,
+                      color: CustomersTheme.colors.primaryColor,
+                      size: 35,
+                    )
+                  : CountBadge(
+                      value: userConsumer.cartItemsCount.toString(),
+                      color: CustomersTheme.colors.errorColor,
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: CustomersTheme.colors.primaryColor,
+                        size: 35,
+                      ),
+                    );
+            }),
+          ),
+        ],
+      ),
+      drawer: MyDrawer(
+        scaffoldKey: _scaffoldKey,
+      ),
+      backgroundColor: CustomersTheme.colors.primaryColor,
+      bottomNavigationBar: const MyBottomNavBar(),
+      body: PageView(
+        controller: tabsProvider.pageController,
+        onPageChanged: tabsProvider.updateSelectedPageIndex,
+        children: tabsProvider.pages,
+      ),
+    );
   }
 }

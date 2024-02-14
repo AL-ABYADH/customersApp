@@ -9,7 +9,7 @@ import '../../../widgets/bottom_button.dart';
 import '../../../widgets/rating.dart';
 import '../../../widgets/product_condition.dart';
 import '../../../widgets/warranty.dart';
-import '../../tabs_screen/screens/view_image_screen.dart';
+import '../../view_image_screen.dart';
 import '../providers/product_item_details_provider.dart';
 
 class ProductItemDetailsScreen extends StatelessWidget {
@@ -19,6 +19,8 @@ class ProductItemDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final token = Provider.of<UserProvider>(context, listen: false).token!;
+
     final routeArgs = ModalRoute.of(context)!.settings.arguments as Map;
 
     final productItemDetailsProvider =
@@ -238,73 +240,75 @@ class ProductItemDetailsScreen extends StatelessWidget {
                       ),
 
                       // Item flaws
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'العيوب',
-                              style: CustomersTheme.textStyles.titleLarge,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Column(
-                                children: [
-                                  ...productItem.flaws.map(
-                                    (flaw) => Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 4,
-                                              backgroundColor:
-                                                  productItemDetailsProvider
-                                                      .getSeverityLevelColor(
-                                                          flaw.severityLevel),
-                                            ),
-                                            const SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text(
-                                              flaw.flaw,
-                                              style: CustomersTheme
-                                                  .textStyles.displayLarge,
-                                            ),
-                                            const SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text(
-                                              productItemDetailsProvider
-                                                  .getSeverityLevelText(
-                                                      flaw.severityLevel),
-                                              style: CustomersTheme
-                                                  .textStyles.displayLarge
-                                                  .copyWith(
-                                                      color: productItemDetailsProvider
-                                                          .getSeverityLevelColor(
-                                                              flaw.severityLevel)),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                      if (productItem.flaws.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'العيوب',
+                                style: CustomersTheme.textStyles.titleLarge,
                               ),
-                            ),
-                          ],
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: Column(
+                                  children: [
+                                    ...productItem.flaws.map(
+                                      (flaw) => Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              CircleAvatar(
+                                                radius: 4,
+                                                backgroundColor:
+                                                    productItemDetailsProvider
+                                                        .getSeverityLevelColor(
+                                                            flaw.severityLevel),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                flaw.flaw,
+                                                style: CustomersTheme
+                                                    .textStyles.displayLarge,
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                productItemDetailsProvider
+                                                    .getSeverityLevelText(
+                                                        flaw.severityLevel),
+                                                style: CustomersTheme
+                                                    .textStyles.displayLarge
+                                                    .copyWith(
+                                                        color: productItemDetailsProvider
+                                                            .getSeverityLevelColor(
+                                                                flaw.severityLevel)),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      if (productItem.flaws.isNotEmpty)
+                        const SizedBox(
+                          height: 15,
+                        ),
 
                       // Product features
                       Padding(
@@ -340,16 +344,56 @@ class ProductItemDetailsScreen extends StatelessWidget {
           ),
           SizedBox(
             height: 70,
-            child: BottomButton(
-              icon: const Icon(Icons.shopping_cart),
-              onClick: () {},
-              child: Text(
-                'إضافة لسلة المشتريات',
-                style: CustomersTheme.textStyles.displayLarger.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            child: Consumer<ProductItemDetailsProvider>(
+                builder: (context, productItemDetailsConsumer, _) {
+              return BottomButton(
+                icon: Icon(productItem.inCart ? Icons.delete : Icons.add),
+                onClick: productItemDetailsConsumer.isLoading
+                    ? () {}
+                    : (productItem.inCart
+                        ? () => productItemDetailsProvider.removeFromCart(
+                              token: token,
+                              productItem: productItem,
+                              ctx: context,
+                            )
+                        : () => productItemDetailsProvider.addToCart(
+                              token: token,
+                              productItem: productItem,
+                              ctx: context,
+                            )),
+                color: productItem.inCart
+                    ? CustomersTheme.colors.errorColor
+                    : CustomersTheme.colors.primaryColor,
+                child: productItemDetailsConsumer.isLoading
+                    ? const Expanded(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 25,
+                              width: 25,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Expanded(
+                        child: Text(
+                          productItem.inCart
+                              ? 'حذف من سلة المشتريات'
+                              : 'إضافة لسلة المشتريات',
+                          style:
+                              CustomersTheme.textStyles.displayLarger.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+              );
+            }),
           ),
         ],
       ),

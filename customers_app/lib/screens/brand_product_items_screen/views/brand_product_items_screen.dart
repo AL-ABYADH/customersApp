@@ -33,31 +33,31 @@ class BrandProductItemsScreen extends StatelessWidget {
         body: Consumer<BrandProductItemsProvider>(
             builder: (context, brandProductItemConsumer, _) {
           return FutureBuilder(
-            future: !brandProductItemConsumer.itemsFetched
+            future: !brandProductItemConsumer.productItemsFetched
                 ? brandProductItemConsumer.fetchBrandProductItems(
                     token, productId)
                 : null,
-            builder: (context, messagesSnapshot) {
-              if (messagesSnapshot.connectionState == ConnectionState.waiting) {
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
                   child: CircularProgressIndicator(
                     color: CustomersTheme.colors.primaryColor,
                   ),
                 );
-              } else if (messagesSnapshot.error != null) {
-                return messagesSnapshot.error is SocketException ||
-                        messagesSnapshot.error is TimeoutException
+              } else if (snapshot.error != null) {
+                return snapshot.error is SocketException ||
+                        snapshot.error is TimeoutException
                     ? LoadingError(
                         message: 'تحقق من اتصالك بالشبكة ثم قم',
-                        refresh: brandProductItemConsumer.refetchItems,
+                        refresh: brandProductItemConsumer.refetchProductItems,
                       )
                     : LoadingError(
                         message: 'حدث خطأ ما في النظام، قم',
-                        refresh: brandProductItemConsumer.refetchItems,
+                        refresh: brandProductItemConsumer.refetchProductItems,
                       );
               } else {
                 return ProductsItemsGrid(
-                  items: brandProductItemConsumer.items,
+                  items: brandProductItemConsumer.productItems,
                   category: '',
                 );
               }

@@ -1,6 +1,19 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import '../../../models/product_item.dart';
+import '../../../providers/user_provider.dart';
 import '../../../theme/customers_theme.dart';
+import '../../../utils/display_success_snack_bar.dart';
+import '../../../utils/send_delete.dart';
+import '../../../utils/send_post.dart';
+import '../../../utils/display_http_error_snack_bar.dart';
+import '../../cart/providers/cart_provider.dart';
+import '../../tabs_screen/screens/home_screen/providers/home_provider.dart';
 
 class ProductItemDetailsProvider with ChangeNotifier {
   Color getSeverityLevelColor(String level) {
@@ -82,5 +95,96 @@ class ProductItemDetailsProvider with ChangeNotifier {
         .split('')
         .map((digit) => arabicNumerals[int.parse(digit)])
         .join('');
+  }
+
+  var isLoading = false;
+
+  final _client = http.Client();
+
+  Future<void> addToCart({
+    required String token,
+    required ProductItem productItem,
+    required BuildContext ctx,
+  }) async {
+    final url = Uri.parse('${dotenv.env['URL']}/api/carts/add-to-cart');
+    final Map<String, dynamic> requestBody = {
+      'productItemId': productItem.id,
+    };
+    try {
+      isLoading = true;
+      notifyListeners();
+
+      await sendPost(
+        url: url,
+        client: _client,
+        requestBody: json.encode(requestBody),
+        token: token,
+      );
+
+      isLoading = false;
+      notifyListeners();
+
+      productItem.addToCart();
+
+      if (!ctx.mounted) return;
+      final homeProvider = Provider.of<HomeProvider>(ctx, listen: false);
+      homeProvider.addToCart(productItem.id);
+
+      final cartProvider = Provider.of<CartProvider>(ctx, listen: false);
+      cartProvider.addToCart(productItem.id);
+
+      await Provider.of<UserProvider>(ctx, listen: false)
+          .incrementCartItemsCount();
+      if (!ctx.mounted) return;
+      displaySuccessSnackBar(ctx, 'تمت الإضافة للسلة');
+    } catch (err) {
+      // print(err);
+      isLoading = false;
+      notifyListeners();
+      if (!ctx.mounted) return;
+      displayHttpErrorSnackBar(ctx: ctx, err: err, showServerError: false);
+    }
+  }
+
+  Future<void> removeFromCart({
+    required String token,
+    required ProductItem productItem,
+    required BuildContext ctx,
+  }) async {
+    final url = Uri.parse(
+        '${dotenv.env['URL']}/api/carts/remove-from-cart/${productItem.id}');
+    try {
+      isLoading = true;
+      notifyListeners();
+
+      await sendDelete(
+        url: url,
+        client: _client,
+        token: token,
+      );
+
+      isLoading = false;
+      notifyListeners();
+
+      productItem.removeFromCart();
+
+      if (!ctx.mounted) return;
+      final homeProvider = Provider.of<HomeProvider>(ctx, listen: false);
+      homeProvider.removeFromCart(productItem.id);
+
+      final cartProvider = Provider.of<CartProvider>(ctx, listen: false);
+      cartProvider.removeFromCart(productItem.id);
+
+      await Provider.of<UserProvider>(ctx, listen: false)
+          .decrementCartItemsCount();
+      if (!ctx.mounted) return;
+      displaySuccessSnackBar(ctx, 'تم الحذف من السلة');
+    } catch (err) {
+      // print(err);
+      isLoading = false;
+      notifyListeners();
+      if (!ctx.mounted) return;
+      displayHttpErrorSnackBar(ctx: ctx, err: err, showServerError: false);
+    }
   }
 }
